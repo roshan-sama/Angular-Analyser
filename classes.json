@@ -1,0 +1,62 @@
+[
+    {
+        "name": "AppRoutingModule",
+        "documentation": "",
+        "type": "typeof AppRoutingModule",
+        "constructors": [
+            {
+                "parameters": [],
+                "returnType": "AppRoutingModule",
+                "documentation": ""
+            }
+        ]
+    },
+    {
+        "name": "AppComponent",
+        "documentation": "",
+        "type": "typeof AppComponent",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "hero",
+                        "documentation": "",
+                        "type": "HeroService"
+                    }
+                ],
+                "returnType": "AppComponent",
+                "documentation": ""
+            }
+        ]
+    },
+    {
+        "name": "AppModule",
+        "documentation": "",
+        "type": "typeof AppModule",
+        "constructors": [
+            {
+                "parameters": [],
+                "returnType": "AppModule",
+                "documentation": ""
+            }
+        ]
+    },
+    {
+        "name": "HeroService",
+        "documentation": "",
+        "type": "typeof HeroService",
+        "constructors": [
+            {
+                "parameters": [
+                    {
+                        "name": "httpClient",
+                        "documentation": "",
+                        "type": "HttpClient"
+                    }
+                ],
+                "returnType": "HeroService",
+                "documentation": ""
+            }
+        ]
+    }
+]

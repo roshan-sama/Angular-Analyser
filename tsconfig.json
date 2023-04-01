@@ -27,7 +27,7 @@
     ]
   },
   "files": [
-    "analyser.ts",
+    "angular-analyzer.js",
     "dts.ts"
   ]
 }

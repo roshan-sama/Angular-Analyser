@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeroService } from 'src/services/hero.service';
+import { analysisOutput } from 'src/utils/analysis-output';
 import { miserables } from 'src/utils/fg-example';
 import { ForceGraph } from 'src/utils/force-graph';
 
@@ -14,10 +15,10 @@ export class AppComponent {
   constructor(private hero: HeroService) { }
 
   ngOnInit() {
-    const chart = ForceGraph(miserables, {
-      nodeId: d => d.id,
-      nodeGroup: (d: any) => d.group,
-      nodeTitle: (d: any) => `${d.id}\n${d.group}`,
+    const chart = ForceGraph(analysisOutput, {
+      nodeId: d => d.value[1],
+      // nodeGroup: (d: any) => d.group,
+      nodeTitle: (d: any) => d.value[1],
       //@ts-ignore
       linkStrokeWidth: (l: any) => Math.sqrt(l.value),
       width: 1000,

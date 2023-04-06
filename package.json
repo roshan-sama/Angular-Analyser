@@ -9,9 +9,7 @@
     "start": "node server.js",
     "new": "ng new",
     "ngservice": "cd ng-analysis && ",
-    "analyse": "tsc -p tsconfig.json && node analyser.js",
-    "analyse2": "tsc -p tsconfig.json && node dts.js",
-    "script": "node analyser.mjs"
+    "analyse": "node angular-analyzer.js"
   },
   "devDependencies": {
     "@angular/cli": "15.2.1",

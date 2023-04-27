@@ -1,4 +1,4 @@
-export const analysisOutput = {
+export const analysisOutput1: outputGraph1 = {
     "nodesById": {
         "HeroService": {
             "name": "HeroService",
@@ -73,4 +73,10 @@ export const analysisOutput = {
             ]
         }
     ]
+}
+
+export interface outputGraph1 {
+    nodesById: {[key in string]: {name: string, dependencies: any[]}}
+    links: any
+    nodes: any
 }

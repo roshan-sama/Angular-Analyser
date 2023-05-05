@@ -1,6 +1,8 @@
 const tsMorph = require("ts-morph");
 const glob = require("glob");
-const project = new tsMorph.Project();
+const project = new tsMorph.Project({
+    tsConfigFilePath: "ng-analysis/tsconfig.json",
+});
 
 const pattern = "ng-analysis/**/*.ts";
 const files = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] });
@@ -21,14 +23,11 @@ let sourceId = ''
 
 let targetSymbolDefinitions = []
 let targetSymbolDefinition
+let parentIdentifier
 
-let targetFilename
+let targetFile
 let targetSymbolName
 let targetId
-
-files.forEach((file) => {
-    project.addSourceFileAtPath(file)
-})
 
 /** @type {OutputGraph1} */
 let dependencyGraph = {
@@ -39,34 +38,34 @@ let dependencyGraph = {
 
 files.forEach((file) => {
 
-    analysisSourceFile = project.addSourceFileAtPath(file)
+    analysisSourceFile = project.getSourceFile(file)
     sourceFilename = analysisSourceFile.getFilePath()
 
     for (analysisClass of analysisSourceFile.getClasses()) {
 
         sourceSymbolName = analysisClass.getName()
-        sourceId = getId(sourceFilename, sourceSymbolName)
+        sourceId = getId(analysisSourceFile, sourceSymbolName)
 
-        dependencyGraph.nodesById[sourceId] = {
-            name: sourceSymbolName,
-            type: 'class'
+        if (!dependencyGraph.nodesById[sourceId]) {
+            dependencyGraph.nodesById[sourceId] = {
+                name: sourceSymbolName,
+                type: 'class'
+            }
+
+            dependencyGraph.nodes.push({
+                $type: "ref",
+                value: [
+                    "nodesById",
+                    sourceId
+                ]
+            })
         }
 
-        dependencyGraph.nodes.push({
-            $type: "ref",
-            value: [
-                "nodesById",
-                sourceId
-            ]
-        })
+        for (reference of analysisClass.findReferencesAsNodes()) {
 
-        for (reference of analysisClass.findReferences()) {
-
-            targetSymbolDefinition = reference.getDefinition()
-
-            targetFilename = targetSymbolDefinition.getSourceFile().getFilePath()
-            targetSymbolName = targetSymbolDefinition.getName()
-            targetId = getId(targetFilename, targetSymbolName)
+            targetFile = reference.getSourceFile()
+            targetSymbolName = targetFile.getBaseNameWithoutExtension()
+            targetId = getId(targetFile)
 
             dependencyGraph.links.push({
                 source: {
@@ -85,13 +84,20 @@ files.forEach((file) => {
                 }
             })
 
+            console.log("New Link", sourceId + " -> " + targetId)
             if (!dependencyGraph.nodesById[targetId]) {
                 dependencyGraph.nodesById[targetId] = {
                     name: targetSymbolName,
                     type: 'unknown'
                 }
+                dependencyGraph.nodes.push({
+                    $type: "ref",
+                    value: [
+                        "nodesById",
+                        targetId
+                    ]
+                })
             }
-
         }
     }
 })
@@ -103,11 +109,24 @@ function ensureFileInMap(sourceFilename) {
     }
 }
 
-function getId(sourceFilename, nodeName) {
-    ensureFileInMap(sourceFilename)
-    return fileToIndexMap[sourceFilename] + ": " + nodeName
+function getId(analysisSourceFile, nodeName) {
+    ensureFileInMap(analysisSourceFile.getFilePath())
+    return fileToIndexMap[analysisSourceFile.getFilePath()] + ": " + analysisSourceFile.getBaseNameWithoutExtension()
 }
 
+function findParentIdentifier(node) {
+    let currentNode = node;
+
+    while (currentNode) {
+        const parentNode = currentNode.getParent();
+        if (parentNode && tsMorph.Node.isIdentifier(parentNode)) {
+            return parentNode;
+        }
+        currentNode = parentNode;
+    }
+
+    return null;
+}
 /**
  * @typedef {Object} DependencyRef
  * @property {"ref"} $type
@@ -135,5 +154,3 @@ function getId(sourceFilename, nodeName) {
  */
 
 console.log(JSON.stringify(dependencyGraph, null, 2))
-console.log("---")
-console.log(fileToIndexMap)

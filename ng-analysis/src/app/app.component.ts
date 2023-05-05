@@ -15,7 +15,7 @@ export class AppComponent {
 
   ngOnInit() {
     //@ts-ignore
-    const chart = ForceGraph(analysisOutput1, this.chart)
+    const chart = ForceGraph(analysisOutput, this.chart)
     console.log(chart, "cht")
     //@ts-ignore
     document.getElementById("chart-div")?.appendChild(chart)

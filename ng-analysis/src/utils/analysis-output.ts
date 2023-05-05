@@ -21,74 +21,43 @@ export interface falcorDependencyGraph {
     }[]
 }
 
-export const analysisOutput: falcorDependencyGraph = {
+export const analysisOutput: falcorDependencyGraph =
+{
     "nodesById": {
-        "0: HeroService": {
+        "0: hero.service": {
             "name": "HeroService",
             "type": "class"
         },
-        "1: class HeroService": {
-            "name": "class HeroService",
+        "1: app.component": {
+            "name": "app.component",
             "type": "unknown"
         },
-        "2: (alias) class HeroService\nimport HeroService": {
-            "name": "(alias) class HeroService\nimport HeroService",
+        "2: hero.service.spec": {
+            "name": "hero.service.spec",
             "type": "unknown"
         },
-        "3: AppModule": {
+        "3: app.module": {
             "name": "AppModule",
             "type": "class"
         },
-        "3: class AppModule": {
-            "name": "class AppModule",
+        "4: main": {
+            "name": "main",
             "type": "unknown"
         },
-        "4: (alias) class AppModule\nimport AppModule": {
-            "name": "(alias) class AppModule\nimport AppModule",
+        "5: app.component.spec": {
+            "name": "app.component.spec",
             "type": "unknown"
         },
-        "5: AppComponent": {
-            "name": "AppComponent",
-            "type": "class"
-        },
-        "5: class AppComponent": {
-            "name": "class AppComponent",
-            "type": "unknown"
-        },
-        "3: (alias) class AppComponent\nimport AppComponent": {
-            "name": "(alias) class AppComponent\nimport AppComponent",
-            "type": "unknown"
-        },
-        "6: (alias) class AppComponent\nimport AppComponent": {
-            "name": "(alias) class AppComponent\nimport AppComponent",
-            "type": "unknown"
-        },
-        "7: AppRoutingModule": {
+        "6: app-routing.module": {
             "name": "AppRoutingModule",
             "type": "class"
         },
-        "7: class AppRoutingModule": {
-            "name": "class AppRoutingModule",
-            "type": "unknown"
-        },
-        "3: (alias) class AppRoutingModule\nimport AppRoutingModule": {
-            "name": "(alias) class AppRoutingModule\nimport AppRoutingModule",
-            "type": "unknown"
-        },
-        "8: RjmTestComponentComponent": {
+        "7: rjm-test-component.component": {
             "name": "RjmTestComponentComponent",
             "type": "class"
         },
-        "8: class RjmTestComponentComponent": {
-            "name": "class RjmTestComponentComponent",
-            "type": "unknown"
-        },
-        "3: (alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent": {
-            "name": "(alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent",
-            "type": "unknown"
-        },
-        "9: (alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent": {
-            "name": "(alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent",
+        "8: rjm-test-component.component.spec": {
+            "name": "rjm-test-component.component.spec",
             "type": "unknown"
         }
     },
@@ -97,35 +66,63 @@ export const analysisOutput: falcorDependencyGraph = {
             "$type": "ref",
             "value": [
                 "nodesById",
-                "0: HeroService"
+                "0: hero.service"
             ]
         },
         {
             "$type": "ref",
             "value": [
                 "nodesById",
-                "3: AppModule"
+                "1: app.component"
             ]
         },
         {
             "$type": "ref",
             "value": [
                 "nodesById",
-                "5: AppComponent"
+                "2: hero.service.spec"
             ]
         },
         {
             "$type": "ref",
             "value": [
                 "nodesById",
-                "7: AppRoutingModule"
+                "3: app.module"
             ]
         },
         {
             "$type": "ref",
             "value": [
                 "nodesById",
-                "8: RjmTestComponentComponent"
+                "4: main"
+            ]
+        },
+        {
+            "$type": "ref",
+            "value": [
+                "nodesById",
+                "5: app.component.spec"
+            ]
+        },
+        {
+            "$type": "ref",
+            "value": [
+                "nodesById",
+                "6: app-routing.module"
+            ]
+        },
+        {
+            "$type": "ref",
+            "value": [
+                "nodesById",
+                "7: rjm-test-component.component"
+            ]
+        },
+        {
+            "$type": "ref",
+            "value": [
+                "nodesById",
+                "8: rjm-test-component.component.spec"
             ]
         }
     ],
@@ -135,14 +132,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "0: HeroService"
+                    "0: hero.service"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "1: class HeroService"
+                    "1: app.component"
                 ]
             }
         },
@@ -151,14 +148,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "0: HeroService"
+                    "0: hero.service"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "2: (alias) class HeroService\nimport HeroService"
+                    "1: app.component"
                 ]
             }
         },
@@ -167,14 +164,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: AppModule"
+                    "0: hero.service"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: class AppModule"
+                    "2: hero.service.spec"
                 ]
             }
         },
@@ -183,14 +180,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: AppModule"
+                    "0: hero.service"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "4: (alias) class AppModule\nimport AppModule"
+                    "2: hero.service.spec"
                 ]
             }
         },
@@ -199,14 +196,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "5: AppComponent"
+                    "0: hero.service"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "5: class AppComponent"
+                    "2: hero.service.spec"
                 ]
             }
         },
@@ -215,14 +212,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "5: AppComponent"
+                    "3: app.module"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: (alias) class AppComponent\nimport AppComponent"
+                    "4: main"
                 ]
             }
         },
@@ -231,14 +228,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "5: AppComponent"
+                    "3: app.module"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "6: (alias) class AppComponent\nimport AppComponent"
+                    "4: main"
                 ]
             }
         },
@@ -247,14 +244,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "7: AppRoutingModule"
+                    "1: app.component"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "7: class AppRoutingModule"
+                    "3: app.module"
                 ]
             }
         },
@@ -263,14 +260,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "7: AppRoutingModule"
+                    "1: app.component"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: (alias) class AppRoutingModule\nimport AppRoutingModule"
+                    "3: app.module"
                 ]
             }
         },
@@ -279,14 +276,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "8: RjmTestComponentComponent"
+                    "1: app.component"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "8: class RjmTestComponentComponent"
+                    "3: app.module"
                 ]
             }
         },
@@ -295,14 +292,14 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "8: RjmTestComponentComponent"
+                    "1: app.component"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "3: (alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent"
+                    "5: app.component.spec"
                 ]
             }
         },
@@ -311,14 +308,206 @@ export const analysisOutput: falcorDependencyGraph = {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "8: RjmTestComponentComponent"
+                    "1: app.component"
                 ]
             },
             "target": {
                 "$type": "ref",
                 "value": [
                     "nodesById",
-                    "9: (alias) class RjmTestComponentComponent\nimport RjmTestComponentComponent"
+                    "5: app.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "1: app.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "5: app.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "1: app.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "5: app.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "1: app.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "5: app.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "6: app-routing.module"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "3: app.module"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "6: app-routing.module"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "3: app.module"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "3: app.module"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "3: app.module"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "8: rjm-test-component.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "8: rjm-test-component.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "8: rjm-test-component.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "8: rjm-test-component.component.spec"
+                ]
+            }
+        },
+        {
+            "source": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "7: rjm-test-component.component"
+                ]
+            },
+            "target": {
+                "$type": "ref",
+                "value": [
+                    "nodesById",
+                    "8: rjm-test-component.component.spec"
                 ]
             }
         }

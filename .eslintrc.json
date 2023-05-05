@@ -2,7 +2,7 @@
 	"root": true,
 	"env": {
 		"node": true,
-		"es6": true
+		"es2022": true
 	},
 	"rules": {
 		"no-console": 0,
@@ -10,7 +10,7 @@
 		"no-cond-assign": 0,
 		"no-unused-vars": 1,
 		"no-extra-semi": "warn",
-		"semi": "warn"
+		"semi": "off"
 	},
 	"extends": "eslint:recommended",
 	"parserOptions": {

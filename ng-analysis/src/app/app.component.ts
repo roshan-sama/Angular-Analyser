@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HeroService } from 'src/services/hero.service';
-import { miserables } from 'src/utils/fg-example';
+import { analysisOutput, falcorDependencyGraph } from 'src/utils/analysis-output';
 import { ForceGraph } from 'src/utils/force-graph';
 
 @Component({
@@ -14,19 +14,24 @@ export class AppComponent {
   constructor(private hero: HeroService) { }
 
   ngOnInit() {
-    const chart = ForceGraph(miserables, {
-      nodeId: d => d.id,
-      nodeGroup: (d: any) => d.group,
-      nodeTitle: (d: any) => `${d.id}\n${d.group}`,
-      //@ts-ignore
-      linkStrokeWidth: (l: any) => Math.sqrt(l.value),
-      width: 1000,
-      height: 600,
-      //@ts-ignore
-      invalidation: null // a promise to stop the simulation when the cell is re-run
-    })
+    //@ts-ignore
+    const chart = ForceGraph(analysisOutput, this.chart)
     console.log(chart, "cht")
     //@ts-ignore
     document.getElementById("chart-div")?.appendChild(chart)
+  }
+
+  chart = {
+    nodeId: (d: any) => d.value[1],
+    nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]].type,
+    nodeTitle: (d: any) => analysisOutput.nodesById[d.value[1]].name,
+    //@ts-ignore
+    linkStrokeWidth: (l: any) => Math.sqrt(l.value),
+    linkSource: ({ source }: falcorDependencyGraph["links"][0]) => source.value[1],
+    linkTarget: ({ target }: falcorDependencyGraph["links"][0]) => target.value[1],
+    width: 1000,
+    height: 600,
+    //@ts-ignore
+    invalidation: null // a promise to stop the simulation when the cell is re-run
   }
 }

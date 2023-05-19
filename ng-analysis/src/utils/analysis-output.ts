@@ -1,515 +1,571 @@
-export interface falcorDependencyGraph {
-    nodesById: {
-        [key in string]: {
-            name: string,
-            type: string
-        }
-    },
-    nodes: {
-        $type: "ref",
-        value: string[]
-    }[]
-    links: {
-        source: {
-            $type: "ref",
-            value: string[]
-        },
-        target: {
-            $type: "ref",
-            value: string[]
-        }
-    }[]
-}
+import { falcorDependencyGraph } from "src/app/interfaces/falcor-dependency-graph";
 
 export const analysisOutput: falcorDependencyGraph =
 {
-    "nodesById": {
-        "0: hero.service": {
-            "name": "HeroService",
-            "type": "class"
-        },
-        "1: app.component": {
-            "name": "app.component",
-            "type": "unknown"
-        },
-        "2: hero.service.spec": {
-            "name": "hero.service.spec",
-            "type": "unknown"
-        },
-        "3: app.module": {
-            "name": "AppModule",
-            "type": "class"
-        },
-        "4: main": {
-            "name": "main",
-            "type": "unknown"
-        },
-        "5: app.component.spec": {
-            "name": "app.component.spec",
-            "type": "unknown"
-        },
-        "6: app-routing.module": {
-            "name": "AppRoutingModule",
-            "type": "class"
-        },
-        "7: rjm-test-component.component": {
-            "name": "RjmTestComponentComponent",
-            "type": "class"
-        },
-        "8: rjm-test-component.component.spec": {
-            "name": "rjm-test-component.component.spec",
-            "type": "unknown"
-        }
+  "nodesById": {
+    "0: force-graphForceGraph (Function)": {
+      "name": "ForceGraph",
+      "type": "function",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/utils/force-graph.ts"
     },
-    "nodes": [
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "0: hero.service"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "1: app.component"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "2: hero.service.spec"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "3: app.module"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "4: main"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "5: app.component.spec"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "6: app-routing.module"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "7: rjm-test-component.component"
-            ]
-        },
-        {
-            "$type": "ref",
-            "value": [
-                "nodesById",
-                "8: rjm-test-component.component.spec"
-            ]
-        }
-    ],
-    "links": [
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "0: hero.service"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "0: hero.service"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "0: hero.service"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "2: hero.service.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "0: hero.service"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "2: hero.service.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "0: hero.service"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "2: hero.service.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "4: main"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "4: main"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "5: app.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "5: app.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "5: app.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "5: app.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "1: app.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "5: app.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "6: app-routing.module"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "6: app-routing.module"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "3: app.module"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "8: rjm-test-component.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "8: rjm-test-component.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "8: rjm-test-component.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "8: rjm-test-component.component.spec"
-                ]
-            }
-        },
-        {
-            "source": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "7: rjm-test-component.component"
-                ]
-            },
-            "target": {
-                "$type": "ref",
-                "value": [
-                    "nodesById",
-                    "8: rjm-test-component.component.spec"
-                ]
-            }
-        }
-    ]
+    "1: app.componentapp.component.ts": {
+      "name": "app.component.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app.component.ts"
+    },
+    "1: app.componentAppComponent (Class)": {
+      "name": "AppComponent",
+      "type": "class",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app.component.ts"
+    },
+    "2: hero.serviceHeroService (Class)": {
+      "name": "HeroService",
+      "type": "class",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/services/hero.service.ts"
+    },
+    "3: hero.service.spechero.service.spec.ts": {
+      "name": "hero.service.spec.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/services/hero.service.spec.ts"
+    },
+    "4: app.moduleAppModule (Class)": {
+      "name": "AppModule",
+      "type": "class",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app.module.ts"
+    },
+    "5: mainmain.ts": {
+      "name": "main.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/main.ts"
+    },
+    "4: app.moduleapp.module.ts": {
+      "name": "app.module.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app.module.ts"
+    },
+    "6: app.component.specapp.component.spec.ts": {
+      "name": "app.component.spec.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app.component.spec.ts"
+    },
+    "7: app-routing.moduleAppRoutingModule (Class)": {
+      "name": "AppRoutingModule",
+      "type": "class",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/app-routing.module.ts"
+    },
+    "8: rjm-test-component.componentRjmTestComponentComponent (Class)": {
+      "name": "RjmTestComponentComponent",
+      "type": "class",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.ts"
+    },
+    "9: rjm-test-component.component.specrjm-test-component.component.spec.ts": {
+      "name": "rjm-test-component.component.spec.ts",
+      "type": "sourceFile",
+      "filePath": "/workspaces/vscode-remote-try-node/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts"
+    }
+  },
+  "nodes": [
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "0: force-graphForceGraph (Function)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "1: app.componentapp.component.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "1: app.componentAppComponent (Class)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "2: hero.serviceHeroService (Class)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "3: hero.service.spechero.service.spec.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "4: app.moduleAppModule (Class)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "5: mainmain.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "4: app.moduleapp.module.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "6: app.component.specapp.component.spec.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "7: app-routing.moduleAppRoutingModule (Class)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "0: force-graphForceGraph (Function)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentapp.component.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "0: force-graphForceGraph (Function)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: hero.serviceHeroService (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentapp.component.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: hero.serviceHeroService (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: hero.serviceHeroService (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "3: hero.service.spechero.service.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: hero.serviceHeroService (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "3: hero.service.spechero.service.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: hero.serviceHeroService (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "3: hero.service.spechero.service.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: mainmain.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: mainmain.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleapp.module.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component.specapp.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component.specapp.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component.specapp.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component.specapp.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.componentAppComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component.specapp.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.moduleAppRoutingModule (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleapp.module.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.moduleAppRoutingModule (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleapp.module.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: app.moduleAppModule (Class)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.componentRjmTestComponentComponent (Class)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: rjm-test-component.component.specrjm-test-component.component.spec.ts"
+        ]
+      }
+    }
+  ]
 }

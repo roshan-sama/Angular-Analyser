@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HeroService } from 'src/services/hero.service';
-import { analysisOutput, falcorDependencyGraph } from 'src/utils/analysis-output';
+import { analysisOutput } from 'src/utils/analysis-output';
 import { ForceGraph } from 'src/utils/force-graph';
+import { falcorDependencyGraph } from './interfaces/falcor-dependency-graph';
 
 @Component({
   selector: 'app-root',
@@ -35,3 +36,12 @@ export class AppComponent {
     invalidation: null // a promise to stop the simulation when the cell is re-run
   }
 }
+
+//TODO: Distinguish between arrow functions, and const, var and let variables in naming using 
+//project.getSourceFile('ng-analysis/src/app/app.component.ts').getVariableStatements()
+export const valueitem = () => {
+  console.log("test")
+}
+
+export var gly = ''
+export let hluy = ''

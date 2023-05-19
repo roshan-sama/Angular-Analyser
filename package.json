@@ -1,8 +1,8 @@
 {
-  "name": "docker_web_app",
+  "name": "angular_analyzer",
   "version": "1.0.0",
-  "description": "Node.js on Docker",
-  "author": "First Last <first.last@example.com>",
+  "description": "Angular project analyzer",
+  "author": "Roshan Manuel",
   "main": "server.js",
   "private": true,
   "scripts": {

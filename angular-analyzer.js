@@ -13,7 +13,7 @@ const files = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] }
 
 let analysisSourceFile
 let analysisClass
-let analysisFunction
+let analysisNode
 
 let symbolsThatReferenceEntity
 let symbolsReferencing
@@ -43,115 +43,76 @@ files.forEach((file) => {
     analysisSourceFile = project.getSourceFile(file)
     sourceFilename = analysisSourceFile.getFilePath()
 
-    // TODO: Analysis classes and analysis function for loops 
-    // are similar. Parametrize and convert to function, then call
-    // function instead of duplicating this code
-    for (analysisClass of analysisSourceFile.getClasses()) {
+    // TODO: Let users choose what types of items to analyse, and map appropriate
+    // Sub types and other information as seen in getNodeType so taht CLasses can 
+    // has components, service etc. subtypes based on decorators etc,
+    // finalNodeTypes in getParentIdentifier also needs to make sure its stops searches if these nodes are found
+    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getClasses())
+    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getFunctions())
+    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getVariableDeclarations())
 
-        sourceNodeObject = getNodeObject(analysisClass)
-        sourceId = sourceNodeObject.id
-
-        if (!dependencyGraph.nodesById[sourceId]) {
-            dependencyGraph.nodesById[sourceId] = sourceNodeObject.nodeObject
-
-            dependencyGraph.nodes.push({
-                $type: "ref",
-                value: [
-                    "nodesById",
-                    sourceId
-                ]
-            })
-        }
-
-        for (reference of analysisClass.findReferencesAsNodes()) {
-
-            parentIdentifier = getParentIdentifier.getFinalParentNode(reference)
-            console.log("New Link", sourceId + " -> " + parentIdentifier.id)
-            if (!dependencyGraph.nodesById[parentIdentifier.id]) {
-                dependencyGraph.nodesById[parentIdentifier.id] = parentIdentifier.nodeObject
-                dependencyGraph.nodes.push({
-                    $type: "ref",
-                    value: [
-                        "nodesById",
-                        parentIdentifier.id
-                    ]
-                })
-            }
-
-            dependencyGraph.links.push({
-                source: {
-                    $type: "ref",
-                    "value": [
-                        "nodesById",
-                        sourceId
-                    ],
-                },
-                target: {
-                    $type: "ref",
-                    "value": [
-                        "nodesById",
-                        parentIdentifier.id
-                    ],
-                }
-            })
-        }
-    }
-
-    for (analysisFunction of analysisSourceFile.getFunctions()) {
-
-        sourceNodeObject = getNodeObject(analysisFunction)
-        sourceId = sourceNodeObject.id
-
-        if (!dependencyGraph.nodesById[sourceId]) {
-            dependencyGraph.nodesById[sourceId] = sourceNodeObject.nodeObject
-
-            dependencyGraph.nodes.push({
-                $type: "ref",
-                value: [
-                    "nodesById",
-                    sourceId
-                ]
-            })
-        }
-
-        for (reference of analysisFunction.findReferencesAsNodes()) {
-
-            parentIdentifier = getParentIdentifier.getFinalParentNode(reference)
-            console.log("New Link", sourceId + " -> " + parentIdentifier.id)
-            if (!dependencyGraph.nodesById[parentIdentifier.id]) {
-                dependencyGraph.nodesById[parentIdentifier.id] = parentIdentifier.nodeObject
-                dependencyGraph.nodes.push({
-                    $type: "ref",
-                    value: [
-                        "nodesById",
-                        parentIdentifier.id
-                    ]
-                })
-            }
-
-            dependencyGraph.links.push({
-                source: {
-                    $type: "ref",
-                    "value": [
-                        "nodesById",
-                        sourceId
-                    ],
-                },
-                target: {
-                    $type: "ref",
-                    "value": [
-                        "nodesById",
-                        parentIdentifier.id
-                    ],
-                }
-            })
-        }
-
-    }
     //TODO: for (variableStatements of analysisSourceFile.getVariableStatements())
 })
 
+/**
+ * Analyze a file for a type of Code element such as Class, Function etc.
+ * @param {tsMorph.SourceFile} analysisSourceFile - The call expression to get the function identifier from.
+ * @param {typedefs.processSourceFileCallback} getNodeElements - The call expression to get the function identifier from.
+ * @returns {undefined} 
+ */
+function analyzeFile(analysisSourceFile, getNodeElements) {
+    for (analysisNode of getNodeElements(analysisSourceFile)) {
 
+        sourceNodeObject = getNodeObject(analysisNode)
+        sourceId = sourceNodeObject.id
+
+        if (!dependencyGraph.nodesById[sourceId]) {
+            dependencyGraph.nodesById[sourceId] = sourceNodeObject.nodeObject
+
+            dependencyGraph.nodes.push({
+                $type: "ref",
+                value: [
+                    "nodesById",
+                    sourceId
+                ]
+            })
+        }
+
+        for (reference of analysisNode.findReferencesAsNodes()) {
+
+            parentIdentifier = getParentIdentifier.getFinalParentNode(reference)
+            console.log("New Link", sourceId + " -> " + parentIdentifier.id)
+            if (!dependencyGraph.nodesById[parentIdentifier.id]) {
+                dependencyGraph.nodesById[parentIdentifier.id] = parentIdentifier.nodeObject
+                dependencyGraph.nodes.push({
+                    $type: "ref",
+                    value: [
+                        "nodesById",
+                        parentIdentifier.id
+                    ]
+                })
+            }
+
+            dependencyGraph.links.push({
+                source: {
+                    $type: "ref",
+                    "value": [
+                        "nodesById",
+                        sourceId
+                    ],
+                },
+                target: {
+                    $type: "ref",
+                    "value": [
+                        "nodesById",
+                        parentIdentifier.id
+                    ],
+                }
+            })
+        }
+
+    }
+}
 
 const fileOutput = `import { falcorDependencyGraph } from "src/app/interfaces/falcor-dependency-graph";
 

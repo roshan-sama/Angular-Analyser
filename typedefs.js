@@ -2,7 +2,7 @@
 /**
  * @typedef {Object} NodeObject
  * @property {string} name - The name of the node.
- * @property {"class" | "function" | "sourceFile"} type - The type of the node.
+ * @property {classType} type - The type of the node.
  * @property {string} [filePath] - The file path of the node, if applicable.
  */
 
@@ -30,4 +30,19 @@
  * @property {NodeObject} nodeObject - The Node Object 
  * @property {string} id - The unique identifier associated with the node object
  */
+
+/**
+ * This function processes a SourceFile and returns an array of Nodes.
+ * 
+ * @callback processSourceFileCallback
+ * @param {tsMorph.SourceFile} sourceFile - The source file to process.
+ * @returns {tsMorph.Node[]} The array of nodes extracted from the source file.
+ */
+
+/**
+ * @typedef {"Component" | "Service" | "Module"} classSubType
+ * */
+/**
+ * @typedef {"class" | "function" | "arrowFunction" | "sourceFile" | "component" | "service" | "module" | "const" | "let" | "var"} classType
+ * */
 exports.unused = {};

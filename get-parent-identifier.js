@@ -5,7 +5,8 @@ const getNodeObject = require("./get-node-object").getNodeObject;
 const finalNodeTypes = {
     [tsMorph.SyntaxKind.ClassDeclaration]: 260,
     [tsMorph.SyntaxKind.FunctionDeclaration]: 259,
-    [tsMorph.SyntaxKind.SourceFile]: 308
+    [tsMorph.SyntaxKind.SourceFile]: 308,
+    [tsMorph.SyntaxKind.VariableDeclaration]: 257,
 }
 let parentNode
 

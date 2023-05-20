@@ -19,11 +19,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "skipLibCheck": true,
-    "target": "ES2022",
+    "target": "ES2023",
     "module": "CommonJS",
     "useDefineForClassFields": false,
     "lib": [
-      "ES2022",
+      "ES2023",
       "dom"
     ]
   },

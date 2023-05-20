@@ -1,5 +1,15 @@
 
 const tsMorph = require("ts-morph");
+const typedefs = require("./typedefs");
+
+/** @type {typedefs.classSubType} */
+let classKind
+/** @type {typedefs.classType} */
+let classType
+let declarationType
+
+let nodeName = ''
+let initializer = ''
 
 /**
  * Takes in a ts-morph node and generates the Node Object based on the node's SyntaxKind
@@ -19,25 +29,70 @@ const getNodeObject = (node) => {
             }
         }
         case tsMorph.SyntaxKind.FunctionDeclaration: {
-            const name = `${node.getName()} (Function)`
+            nodeName = `${node.getName()} (Function)`
             return {
                 nodeObject: {
-                    name: node.getName(),
+                    name: nodeName,
                     type: 'function',
                     filePath: node.getSourceFile().getFilePath()
                 },
-                id: getNodeId(node.getSourceFile(), name)
+                id: getNodeId(node.getSourceFile(), nodeName)
             }
         }
         case tsMorph.SyntaxKind.ClassDeclaration: {
-            const name = `${node.getName()} (Class)`
-            return {
-                nodeObject: {
-                    name: node.getName(),
-                    type: 'class',
-                    filePath: node.getSourceFile().getFilePath()
-                },
-                id: getNodeId(node.getSourceFile(), name)
+            if (node instanceof tsMorph.ClassDeclaration) {
+                //TODO: Enable users to select decorators to obtain in main file
+                // Would be a useful feature
+                classKind = undefined
+                classType = 'class'
+                if (node.getDecorators().some((decorator) => decorator.getName() === 'Component')) {
+                    classKind = 'Component'
+                    classType = 'component'
+                }
+                if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
+                    classKind = 'Service'
+                    classType = 'service'
+                }
+                if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
+                    classKind = 'Module'
+                    classType = 'module'
+                }
+                // TODO: See if we should add a flag to ignore references in import statements
+                // And if the sourcefile is the highest level found, we could add the 
+                // highest Syntax kind that is one level below the source file that references
+                // the Identifier
+                nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
+                return {
+                    nodeObject: {
+                        name: nodeName,
+                        type: classType,
+                        filePath: node.getSourceFile().getFilePath()
+                    },
+                    id: getNodeId(node.getSourceFile(), nodeName)
+                }
+            }
+        }
+        break;
+        case (tsMorph.SyntaxKind.VariableDeclaration): {
+            if (node instanceof tsMorph.VariableDeclaration) {
+                initializer = node.getInitializer();
+                declarationType = node.getVariableStatement().getDeclarationList().getDeclarationKind()
+                // Check if initializer is a function
+                if (initializer && tsMorph.Node.isArrowFunction(initializer)) {
+                    nodeName = `${node.getName()} (Arrow Function - ${declarationType})`
+                    classType = 'arrowFunction'
+                } else {
+                    nodeName = `${node.getName()} (${declarationType})`
+                    classType = declarationType
+                }
+                return {
+                    nodeObject: {
+                        name: nodeName,
+                        type: classType,
+                        filePath: node.getSourceFile().getFilePath()
+                    },
+                    id: getNodeId(node.getSourceFile(), nodeName)
+                }
             }
         }
     }

@@ -44,4 +44,4 @@ export const valueitem = () => {
 }
 
 export var gly = ''
-export let hluy = ''
+export let hluy = gly + '20'

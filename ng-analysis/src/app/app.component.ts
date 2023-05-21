@@ -14,9 +14,12 @@ export class AppComponent {
 
   constructor(private hero: HeroService) { }
 
+  analysisOutput?: falcorDependencyGraph
+
   ngOnInit() {
     //@ts-ignore
     const chart = ForceGraph(analysisOutput, this.chart)
+    this.analysisOutput = analysisOutput
     console.log(chart, "cht")
     //@ts-ignore
     document.getElementById("chart-div")?.appendChild(chart)

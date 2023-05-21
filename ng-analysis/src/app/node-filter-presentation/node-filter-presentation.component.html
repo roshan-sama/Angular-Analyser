@@ -1,1 +1,7 @@
-<p>node-filter-presentation works!</p>
+<mat-card class="p-2">
+    <p>Select Code Elements to Display</p>
+    <div class="d-flex">
+        <mat-checkbox *ngFor="let type of types" (change)="handleTypeSelect(type, $event.checked)">{{type}}
+        </mat-checkbox>
+    </div>
+</mat-card>

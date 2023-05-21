@@ -2,14 +2,14 @@
 <div class="toolbar" role="banner">
   <img width="40" alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
-  <span>Typescript Project Analysis</span>
+  <span>Typescript Project Analysis Tool</span>
 </div>
 
 <div class="content" role="main">
 
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
-
+    Typescript Project Analysis Tool
     <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
       <title>Rocket Ship</title>
       <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
@@ -37,11 +37,14 @@
   </div>
 
   <!-- Resources -->
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-    <node-filter-presentation class="d-block col-12 col-md-6"></node-filter-presentation>
-    <div id="chart-div" class="card-container d-block col-12 col-md-6">
+      <node-filter-presentation [analysisGraph]="analysisOutput" class="d-block col-12"></node-filter-presentation>
+    </div>
+    <div class="row">
+      <div id="chart-div" class="card-container d-block col-12">
+      </div>
     </div>
   </div>
-
   <router-outlet></router-outlet>
+</div>

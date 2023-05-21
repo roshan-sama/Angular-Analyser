@@ -43,6 +43,6 @@
  * @typedef {"Component" | "Service" | "Module"} classSubType
  * */
 /**
- * @typedef {"class" | "function" | "arrowFunction" | "sourceFile" | "component" | "service" | "module" | "const" | "let" | "var"} classType
+ * @typedef {"Class" | "Function" | "Arrow Function" | "Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "Const" | "Let variable" | "Var variable"} classType
  * */
 exports.unused = {};

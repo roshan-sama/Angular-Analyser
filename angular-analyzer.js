@@ -4,6 +4,7 @@ const glob = require("glob");
 const fs = require("fs")
 const getParentIdentifier = require("./get-parent-identifier");
 const { getNodeObject } = require("./get-node-object");
+
 const project = new tsMorph.Project({
     tsConfigFilePath: "ng-analysis/tsconfig.json",
 });
@@ -12,24 +13,14 @@ const pattern = "ng-analysis/**/*.ts";
 const files = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] });
 
 let analysisSourceFile
-let analysisClass
 let analysisNode
-
-let symbolsThatReferenceEntity
-let symbolsReferencing
 let reference
 
-let sourceFilename = ''
+let sourceFilename
 let sourceNodeObject
 let sourceId = ''
 
-let targetSymbolDefinitions = []
-let targetSymbolDefinition
 let parentIdentifier
-
-let targetFile
-let targetSymbolName
-let targetId
 
 /** @type {typedefs.FalcorDependencyGraph} */
 let dependencyGraph = {

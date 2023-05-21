@@ -5,7 +5,7 @@ const typedefs = require("./typedefs");
 /** @type {typedefs.classSubType} */
 let classKind
 /** @type {typedefs.classType} */
-let classType
+let nodeType
 let declarationType
 
 let nodeName = ''
@@ -22,7 +22,7 @@ const getNodeObject = (node) => {
             return {
                 nodeObject: {
                     name: node.getBaseName(),
-                    type: 'sourceFile',
+                    type: 'Source File',
                     filePath: node.getFilePath()
                 },
                 id: getNodeId(node.getSourceFile(), node.getBaseName())
@@ -33,7 +33,7 @@ const getNodeObject = (node) => {
             return {
                 nodeObject: {
                     name: nodeName,
-                    type: 'function',
+                    type: 'Function',
                     filePath: node.getSourceFile().getFilePath()
                 },
                 id: getNodeId(node.getSourceFile(), nodeName)
@@ -44,18 +44,18 @@ const getNodeObject = (node) => {
                 //TODO: Enable users to select decorators to obtain in main file
                 // Would be a useful feature
                 classKind = undefined
-                classType = 'class'
+                nodeType = 'Class'
                 if (node.getDecorators().some((decorator) => decorator.getName() === 'Component')) {
                     classKind = 'Component'
-                    classType = 'component'
+                    nodeType = 'Angular Component'
                 }
                 if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
                     classKind = 'Service'
-                    classType = 'service'
+                    nodeType = 'Angular Service'
                 }
                 if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
                     classKind = 'Module'
-                    classType = 'module'
+                    nodeType = 'Angular Module'
                 }
                 // TODO: See if we should add a flag to ignore references in import statements
                 // And if the sourcefile is the highest level found, we could add the 
@@ -65,14 +65,14 @@ const getNodeObject = (node) => {
                 return {
                     nodeObject: {
                         name: nodeName,
-                        type: classType,
+                        type: nodeType,
                         filePath: node.getSourceFile().getFilePath()
                     },
                     id: getNodeId(node.getSourceFile(), nodeName)
                 }
             }
         }
-        break;
+            break;
         case (tsMorph.SyntaxKind.VariableDeclaration): {
             if (node instanceof tsMorph.VariableDeclaration) {
                 initializer = node.getInitializer();
@@ -80,15 +80,15 @@ const getNodeObject = (node) => {
                 // Check if initializer is a function
                 if (initializer && tsMorph.Node.isArrowFunction(initializer)) {
                     nodeName = `${node.getName()} (Arrow Function - ${declarationType})`
-                    classType = 'arrowFunction'
+                    nodeType = 'Arrow Function'
                 } else {
                     nodeName = `${node.getName()} (${declarationType})`
-                    classType = declarationType
+                    nodeType = getNodeTypeFromDeclarationType(declarationType)
                 }
                 return {
                     nodeObject: {
                         name: nodeName,
-                        type: classType,
+                        type: nodeType,
                         filePath: node.getSourceFile().getFilePath()
                     },
                     id: getNodeId(node.getSourceFile(), nodeName)
@@ -118,6 +118,23 @@ function ensureFileInMap(sourceFilename) {
 const getNodeId = (analysisSourceFile, nodeName) => {
     ensureFileInMap(analysisSourceFile.getFilePath())
     return fileToIndexMap[analysisSourceFile.getFilePath()] + ": " + analysisSourceFile.getBaseNameWithoutExtension() + " - " + nodeName
+}
+
+/**
+* Gets the node type corresponding to the declataion type (const, let, var)
+* @param {'const' | 'let' | 'var'} declarationType - The node's name
+* @returns {typedefs.classType} The node type
+*/
+function getNodeTypeFromDeclarationType(declarationType) {
+    if (declarationType === 'const') {
+        return 'Const'
+    }
+    if (declarationType === 'let') {
+        return 'Let variable'
+    }
+    if (declarationType === 'var') {
+        return 'Var variable'
+    }
 }
 
 module.exports = {

@@ -11,93 +11,108 @@ let declarationType
 let nodeName = ''
 let initializer = ''
 
+const syntaxKindToNodeObjectMap = {
+    [tsMorph.SyntaxKind.SourceFile]: (node) => {
+        return {
+            nodeObject: {
+                Name: node.getBaseName(),
+                Type: 'Source File',
+                "File Path": node.getFilePath()
+            },
+            id: getNodeId(node.getSourceFile(), node.getBaseName())
+        }
+    },
+    [tsMorph.SyntaxKind.FunctionDeclaration]: (node) => {
+        nodeName = `${node.getName()} (Function)`
+        return {
+            nodeObject: {
+                Name: nodeName,
+                Type: 'Function',
+                'File Path': node.getSourceFile().getFilePath()
+            },
+            id: getNodeId(node.getSourceFile(), nodeName)
+        }
+    },
+    /**
+     * Function for handling ClassDeclaration nodes.
+     * @param {tsMorph.ClassDeclaration} node
+     * @returns {typedefs.NodeObjectWithId}
+     */
+    [tsMorph.SyntaxKind.ClassDeclaration]: (node) => {
+        //TODO: Enable users to select decorators to obtain in main file
+        // Would be a useful feature
+        classKind = undefined
+        nodeType = 'Class'
+        if (node.getDecorators().some((decorator) => decorator.getName() === 'Component')) {
+            classKind = 'Component'
+            nodeType = 'Angular Component'
+        }
+        if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
+            classKind = 'Service'
+            nodeType = 'Angular Service'
+        }
+        if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
+            classKind = 'Module'
+            nodeType = 'Angular Module'
+        }
+        // TODO: See if we should add a flag to ignore references in import statements
+        // And if the sourcefile is the highest level found, we could add the 
+        // highest Syntax kind that is one level below the source file that references
+        // the Identifier
+        nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
+        return {
+            nodeObject: {
+                Name: nodeName,
+                Type: nodeType,
+                'File Path': node.getSourceFile().getFilePath()
+            },
+            id: getNodeId(node.getSourceFile(), nodeName)
+        }
+    },
+    /**
+     * Function for handling VariableDeclaration nodes.
+     * @param {tsMorph.VariableDeclaration} node
+     * @returns {typedefs.NodeObjectWithId}
+     */
+    [tsMorph.SyntaxKind.VariableDeclaration]: (node) => {
+        initializer = node.getInitializer();
+        declarationType = node.getVariableStatement().getDeclarationList().getDeclarationKind()
+        // Check if initializer is a function
+        if (initializer && tsMorph.Node.isArrowFunction(initializer)) {
+            nodeName = `${node.getName()} (Arrow Function - ${declarationType})`
+            nodeType = 'Arrow Function'
+        } else {
+            nodeName = `${node.getName()} (${declarationType})`
+            nodeType = getNodeTypeFromDeclarationType(declarationType)
+        }
+        return {
+            nodeObject: {
+                Name: nodeName,
+                Type: nodeType,
+                'File Path': node.getSourceFile().getFilePath()
+            },
+            id: getNodeId(node.getSourceFile(), nodeName)
+        }
+    },
+}
+
+let handler
+let nodeToReturn
 /**
  * Takes in a ts-morph node and generates the Node Object based on the node's SyntaxKind
  * @param {tsMorph.Node} node - The call expression to get the function identifier from.
  * @returns {typedefs.NodeObjectWithId} The Node Object representing this node
  */
 const getNodeObject = (node) => {
-    switch (node.getKind()) {
-        case tsMorph.SyntaxKind.SourceFile: {
-            return {
-                nodeObject: {
-                    Name: node.getBaseName(),
-                    Type: 'Source File',
-                    "File Path": node.getFilePath()
-                },
-                id: getNodeId(node.getSourceFile(), node.getBaseName())
-            }
-        }
-        case tsMorph.SyntaxKind.FunctionDeclaration: {
-            nodeName = `${node.getName()} (Function)`
-            return {
-                nodeObject: {
-                    Name: nodeName,
-                    Type: 'Function',
-                    'File Path': node.getSourceFile().getFilePath()
-                },
-                id: getNodeId(node.getSourceFile(), nodeName)
-            }
-        }
-        case tsMorph.SyntaxKind.ClassDeclaration: {
-            if (node instanceof tsMorph.ClassDeclaration) {
-                //TODO: Enable users to select decorators to obtain in main file
-                // Would be a useful feature
-                classKind = undefined
-                nodeType = 'Class'
-                if (node.getDecorators().some((decorator) => decorator.getName() === 'Component')) {
-                    classKind = 'Component'
-                    nodeType = 'Angular Component'
-                }
-                if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
-                    classKind = 'Service'
-                    nodeType = 'Angular Service'
-                }
-                if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
-                    classKind = 'Module'
-                    nodeType = 'Angular Module'
-                }
-                // TODO: See if we should add a flag to ignore references in import statements
-                // And if the sourcefile is the highest level found, we could add the 
-                // highest Syntax kind that is one level below the source file that references
-                // the Identifier
-                nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
-                return {
-                    nodeObject: {
-                        Name: nodeName,
-                        Type: nodeType,
-                        'File Path': node.getSourceFile().getFilePath()
-                    },
-                    id: getNodeId(node.getSourceFile(), nodeName)
-                }
-            }
-        }
-            break;
-        case (tsMorph.SyntaxKind.VariableDeclaration): {
-            if (node instanceof tsMorph.VariableDeclaration) {
-                initializer = node.getInitializer();
-                declarationType = node.getVariableStatement().getDeclarationList().getDeclarationKind()
-                // Check if initializer is a function
-                if (initializer && tsMorph.Node.isArrowFunction(initializer)) {
-                    nodeName = `${node.getName()} (Arrow Function - ${declarationType})`
-                    nodeType = 'Arrow Function'
-                } else {
-                    nodeName = `${node.getName()} (${declarationType})`
-                    nodeType = getNodeTypeFromDeclarationType(declarationType)
-                }
-                return {
-                    nodeObject: {
-                        Name: nodeName,
-                        Type: nodeType,
-                        'File Path': node.getSourceFile().getFilePath()
-                    },
-                    id: getNodeId(node.getSourceFile(), nodeName)
-                }
-            }
-        }
+    handler = syntaxKindToNodeObjectMap[node.getKind()];
+    if (handler) {
+        nodeToReturn = handler(node)
+        return nodeToReturn;
+    }else {
+        console.error("No mapping to obtain node information for node type " + node.getKindName())
     }
+    // add your else case here, if required
 };
-
 
 let fileCount = 0
 let fileToIndexMap = {}

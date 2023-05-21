@@ -15,9 +15,6 @@ export class AppComponent {
 
   constructor(private hero: HeroService) {
     let filterValues: IAnalysisFilter = {}
-    analysisOutput.forEach((key) => {})
-
-    this.defaultFilterValues = 
    }
 
   analysisOutput?: falcorDependencyGraph
@@ -28,8 +25,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.drawGraph(analysisOutput)
-    //@ts-ignore
-    this.handleFilterChange('')
   }
 
   chart = {
@@ -49,7 +44,7 @@ export class AppComponent {
   handleFilterChange(filterValues: IAnalysisFilter) {
     this.filteredOutput = { ...analysisOutput }
     const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
-    console.log(nodeIds, "new node list")
+
     Object.keys(filterValues).forEach((key) => {
       // Loop through each nodeObject and check if for each nodeObject
       // For a single nodeObject, and key provided from the above filter

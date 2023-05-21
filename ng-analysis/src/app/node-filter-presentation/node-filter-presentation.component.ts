@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { falcorDependencyGraph } from '../interfaces/falcor-dependency-graph';
 import { IAnalysisFilter } from '../interfaces/analysis-filter';
+import { analysisOutput } from 'src/utils/analysis-output';
 
 
 @Component({
@@ -16,6 +17,12 @@ export class NodeFilterPresentationComponent {
   filterableKeys: string[] = []
   filterableValues: { [key in string]: string[] } = {}
 
+  filteredObject: IAnalysisFilter = {}
+
+  constructor(){
+    
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['analysisGraph']?.currentValue) {
       this.filterableKeys = this.getFilterableKeys(changes['analysisGraph']?.currentValue)
@@ -23,7 +30,7 @@ export class NodeFilterPresentationComponent {
 
       this.filterableKeys.forEach((key) => {
         const valuesList: string[] = []
-        const valuesSet: { [key in string]: any } = {}
+        const valuesSet: { [key in string]: boolean } = {}
 
         Object.values(nodesObject).forEach((node) => {
           if (valuesSet[node[key]]) {
@@ -34,8 +41,10 @@ export class NodeFilterPresentationComponent {
           }
         })
         this.filterableValues[key] = valuesList
+        this.filteredObject[key] = valuesSet
       })
 
+      console.log(this.filteredObject, "filt object at end")
     }
   }
 
@@ -50,7 +59,6 @@ export class NodeFilterPresentationComponent {
   }
 
   handleTypeSelect(key: string, value: string, checked: boolean) {
-    console.log(key)
-    console.log(value)
+    
   }
 }

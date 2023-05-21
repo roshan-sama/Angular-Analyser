@@ -13,11 +13,18 @@ import { IAnalysisFilter } from './interfaces/analysis-filter';
 export class AppComponent {
   title = 'ng-analysis';
 
-  constructor(private hero: HeroService) { }
+  constructor(private hero: HeroService) {
+    let filterValues: IAnalysisFilter = {}
+    analysisOutput.forEach((key) => {})
+
+    this.defaultFilterValues = 
+   }
 
   analysisOutput?: falcorDependencyGraph
 
   filteredOutput?: falcorDependencyGraph
+
+  defaultFilterValues?: IAnalysisFilter
 
   ngOnInit() {
     this.drawGraph(analysisOutput)
@@ -41,15 +48,20 @@ export class AppComponent {
 
   handleFilterChange(filterValues: IAnalysisFilter) {
     this.filteredOutput = { ...analysisOutput }
-    const nodes = new Set<string>(Object.keys(analysisOutput.nodesById));
-    console.log(nodes, "new node list")
-    // Object.keys(filterValues).forEach((key) => {
-    //   if(this.filteredOutput?.nodesById){
-    //     Object.entries(this.filteredOutput.nodesById).forEach(([nodeId, nodeObject]) => {
-    //       if(nodeObject[key])
-    //     })
-    //   } 
-    // })
+    const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
+    console.log(nodeIds, "new node list")
+    Object.keys(filterValues).forEach((key) => {
+      // Loop through each nodeObject and check if for each nodeObject
+      // For a single nodeObject, and key provided from the above filter
+      nodeIds.forEach((nodeId) => {
+        Object.entries(filterValues[key]).forEach(([value, enabled]) => {
+          if(!enabled){
+            nodeIds.delete(nodeId)
+          }
+        })
+      })      
+    })
+    console.log("Final node Ids", nodeIds)
   }
 
   drawGraph(analysisOutput: falcorDependencyGraph) {

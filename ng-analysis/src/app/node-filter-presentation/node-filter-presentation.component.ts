@@ -13,10 +13,13 @@ export class NodeFilterPresentationComponent {
 
   @Output() filterChangeEvent: EventEmitter<IAnalysisFilter> = new EventEmitter()
 
+  filterableKeys: string[] = []
   types: string[] = ['one', 'two']
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['analysisGraph']?.currentValue) {
+      this.filterableKeys = this.getFilterableKeys(changes['analysisGraph']?.currentValue)
+
       const nodesObject: falcorDependencyGraph["nodesById"] = changes['analysisGraph']?.currentValue.nodesById
       const typeList: string[] = []
       const typeSet: { [key in string]: any } = {}
@@ -31,6 +34,16 @@ export class NodeFilterPresentationComponent {
       })
       this.types = typeList
     }
+  }
+
+  getFilterableKeys(graph: falcorDependencyGraph) {
+    const nodesValues = Object.values(graph.nodesById)
+    if (!(nodesValues.length > 0)) {
+      console.error('Output graph has no nodes in nodesById key')
+      return []
+    }
+    const keys = Object.keys(nodesValues[0])
+    return keys
   }
 
   handleTypeSelect(type: string, checked: boolean) {

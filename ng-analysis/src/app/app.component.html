@@ -72,16 +72,14 @@
   </div>
 
   <!-- Resources -->
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid h-100">
+    <div class="row align-items-center">
       <node-filter-presentation
         [analysisGraph]="analysisOutput"
         (filterChangeEvent)="handleFilterChange($event)"
-        class="d-block col-12"
+        class="d-block col-12 col-md-6"
       ></node-filter-presentation>
-    </div>
-    <div class="row">
-      <div id="chart-div" class="card-container d-block col-12"></div>
+      <div id="chart-div" class="card-container d-block col-md-6"></div>
     </div>
   </div>
   <router-outlet></router-outlet>

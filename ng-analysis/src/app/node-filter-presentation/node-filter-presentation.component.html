@@ -1,8 +1,18 @@
-<p>Select Code Elements to Display</p>
-<mat-card *ngFor="let filterableKey of filterableKeys" class="p-2 mb-2">
-    <h4>{{filterableKey}}</h4>
-    <div class="d-flex flex-wrap" style="max-height: 150px; overflow: auto;">
-        <mat-checkbox *ngFor="let value of filterableValues[filterableKey]" (change)="handleTypeSelect(filterableKey, value, $event.checked)">{{value}}
-        </mat-checkbox>
-    </div>
+<mat-card class="p-2">
+    <p>Select Code Elements to Display</p>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let filterableKey of filterableKeys">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h4>{{filterableKey}}</h4>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex flex-wrap" style="max-height: 150px; overflow: auto;">
+                <mat-checkbox *ngFor="let value of filterableValues[filterableKey]"
+                    (change)="handleTypeSelect(filterableKey, value, $event.checked)"
+                    [checked]="filteredObject[filterableKey][value]">{{value}}
+                </mat-checkbox>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HeroService } from 'src/services/hero.service';
 import { analysisOutput } from 'src/utils/analysis-output';
 import { ForceGraph } from 'src/utils/force-graph';
@@ -11,11 +11,12 @@ import { IAnalysisFilter } from './interfaces/analysis-filter';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'ng-analysis';
 
   constructor(private hero: HeroService) {
     let filterValues: IAnalysisFilter = {}
-   }
+  }
 
   analysisOutput?: falcorDependencyGraph
 
@@ -23,7 +24,11 @@ export class AppComponent {
 
   defaultFilterValues?: IAnalysisFilter
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.analysisOutput = analysisOutput
+  }
+
+  ngAfterViewInit(){
     this.drawGraph(analysisOutput)
   }
 
@@ -45,27 +50,42 @@ export class AppComponent {
     this.filteredOutput = { ...analysisOutput }
     const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
 
+    // For each key in the filter values, 
+    // Loop through each nodeObject and check if that 
+    // node object's value, in the filtered Values is enabled or not
     Object.keys(filterValues).forEach((key) => {
-      // Loop through each nodeObject and check if for each nodeObject
-      // For a single nodeObject, and key provided from the above filter
+
       nodeIds.forEach((nodeId) => {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
-          if(!enabled){
+          if (analysisOutput.nodesById[nodeId][key] === value && !enabled) {
             nodeIds.delete(nodeId)
           }
         })
-      })      
+      })
     })
+
+    // TODO: Hardcoding id as second element here, ensure no side effects
+    this.filteredOutput.nodes = this.filteredOutput.nodes.filter((node) => nodeIds.has(node.value[1]))
+    this.filteredOutput.links = this.filteredOutput.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
+
     console.log("Final node Ids", nodeIds)
+
+    this.drawGraph(this.filteredOutput)
   }
 
   drawGraph(analysisOutput: falcorDependencyGraph) {
     //@ts-ignore
     const chart = ForceGraph(analysisOutput, this.chart)
-    this.analysisOutput = analysisOutput
     console.log(chart, "cht")
-    //@ts-ignore
-    document.getElementById("chart-div")?.appendChild(chart)
+
+    const chartDiv = document.querySelector('#chart-div')
+    if(chartDiv){
+      chartDiv.innerHTML = ''
+      //@ts-ignore
+      chartDiv.appendChild(chart)
+    } else{
+      console.error(`chartDiv element wasn't selectable`)
+    }
   }
 
 }

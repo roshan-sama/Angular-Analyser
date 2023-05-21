@@ -10,6 +10,7 @@ import { NodeFilterPresentationComponent } from './node-filter-presentation/node
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatCardModule} from '@angular/material/card'; 
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

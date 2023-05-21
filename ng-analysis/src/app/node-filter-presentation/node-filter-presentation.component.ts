@@ -19,8 +19,8 @@ export class NodeFilterPresentationComponent {
 
   filteredObject: IAnalysisFilter = {}
 
-  constructor(){
-    
+  constructor() {
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -59,6 +59,7 @@ export class NodeFilterPresentationComponent {
   }
 
   handleTypeSelect(key: string, value: string, checked: boolean) {
-    
+    this.filteredObject[key][value] = checked
+    this.filterChangeEvent.emit(this.filteredObject)
   }
 }

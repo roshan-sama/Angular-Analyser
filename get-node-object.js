@@ -21,9 +21,9 @@ const getNodeObject = (node) => {
         case tsMorph.SyntaxKind.SourceFile: {
             return {
                 nodeObject: {
-                    name: node.getBaseName(),
-                    type: 'Source File',
-                    filePath: node.getFilePath()
+                    Name: node.getBaseName(),
+                    Type: 'Source File',
+                    "File Path": node.getFilePath()
                 },
                 id: getNodeId(node.getSourceFile(), node.getBaseName())
             }
@@ -32,9 +32,9 @@ const getNodeObject = (node) => {
             nodeName = `${node.getName()} (Function)`
             return {
                 nodeObject: {
-                    name: nodeName,
-                    type: 'Function',
-                    filePath: node.getSourceFile().getFilePath()
+                    Name: nodeName,
+                    Type: 'Function',
+                    'File Path': node.getSourceFile().getFilePath()
                 },
                 id: getNodeId(node.getSourceFile(), nodeName)
             }
@@ -64,9 +64,9 @@ const getNodeObject = (node) => {
                 nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
                 return {
                     nodeObject: {
-                        name: nodeName,
-                        type: nodeType,
-                        filePath: node.getSourceFile().getFilePath()
+                        Name: nodeName,
+                        Type: nodeType,
+                        'File Path': node.getSourceFile().getFilePath()
                     },
                     id: getNodeId(node.getSourceFile(), nodeName)
                 }
@@ -87,9 +87,9 @@ const getNodeObject = (node) => {
                 }
                 return {
                     nodeObject: {
-                        name: nodeName,
-                        type: nodeType,
-                        filePath: node.getSourceFile().getFilePath()
+                        Name: nodeName,
+                        Type: nodeType,
+                        'File Path': node.getSourceFile().getFilePath()
                     },
                     id: getNodeId(node.getSourceFile(), nodeName)
                 }

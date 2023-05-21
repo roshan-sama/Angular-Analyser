@@ -12,6 +12,7 @@
  * @property {string[]} value - The value of the reference.
  */
 
+//TODO: Add link type so that users know what type of reference occurred?
 /**
  * @typedef {Object} LinkObject
  * @property {RefObject} source - The source of the link.

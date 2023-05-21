@@ -13,25 +13,15 @@ export const analysisOutput: falcorDependencyGraph =
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
-    "1: app.component - chart (const)": {
-      "Name": "chart (const)",
-      "Type": "Const",
+    "1: app.component - AppComponent (Component)": {
+      "Name": "AppComponent (Component)",
+      "Type": "Angular Component",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
     "2: analysis-output - analysisOutput (const)": {
       "Name": "analysisOutput (const)",
       "Type": "Const",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/utils/analysis-output.ts"
-    },
-    "1: app.component - AppComponent (Component)": {
-      "Name": "AppComponent (Component)",
-      "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
-    },
-    "1: app.component - nodeIds (const)": {
-      "Name": "nodeIds (const)",
-      "Type": "Const",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
     "3: node-filter-presentation.component - node-filter-presentation.component.ts": {
       "Name": "node-filter-presentation.component.ts",
@@ -163,20 +153,6 @@ export const analysisOutput: falcorDependencyGraph =
       "$type": "ref",
       "value": [
         "nodesById",
-        "1: app.component - chart (const)"
-      ]
-    },
-    {
-      "$type": "ref",
-      "value": [
-        "nodesById",
-        "2: analysis-output - analysisOutput (const)"
-      ]
-    },
-    {
-      "$type": "ref",
-      "value": [
-        "nodesById",
         "1: app.component - AppComponent (Component)"
       ]
     },
@@ -184,7 +160,7 @@ export const analysisOutput: falcorDependencyGraph =
       "$type": "ref",
       "value": [
         "nodesById",
-        "1: app.component - nodeIds (const)"
+        "2: analysis-output - analysisOutput (const)"
       ]
     },
     {
@@ -371,7 +347,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "1: app.component - chart (const)"
+          "1: app.component - AppComponent (Component)"
         ]
       }
     },
@@ -483,7 +459,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "1: app.component - nodeIds (const)"
+          "1: app.component - AppComponent (Component)"
         ]
       }
     },

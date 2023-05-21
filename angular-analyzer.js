@@ -41,8 +41,6 @@ files.forEach((file) => {
     analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getClasses())
     analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getFunctions())
     analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getVariableDeclarations())
-
-    //TODO: for (variableStatements of analysisSourceFile.getVariableStatements())
 })
 
 /**

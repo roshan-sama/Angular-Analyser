@@ -14,25 +14,28 @@ export class NodeFilterPresentationComponent {
   @Output() filterChangeEvent: EventEmitter<IAnalysisFilter> = new EventEmitter()
 
   filterableKeys: string[] = []
-  types: string[] = ['one', 'two']
+  filterableValues: { [key in string]: string[] } = {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['analysisGraph']?.currentValue) {
       this.filterableKeys = this.getFilterableKeys(changes['analysisGraph']?.currentValue)
-
       const nodesObject: falcorDependencyGraph["nodesById"] = changes['analysisGraph']?.currentValue.nodesById
-      const typeList: string[] = []
-      const typeSet: { [key in string]: any } = {}
 
-      Object.values(nodesObject).forEach((node) => {
-        if (typeSet[node.type]) {
-          return
-        } else {
-          typeSet[node.type] = true
-          typeList.push(node.type)
-        }
+      this.filterableKeys.forEach((key) => {
+        const valuesList: string[] = []
+        const valuesSet: { [key in string]: any } = {}
+
+        Object.values(nodesObject).forEach((node) => {
+          if (valuesSet[node[key]]) {
+            return
+          } else {
+            valuesSet[node[key]] = true
+            valuesList.push(node[key])
+          }
+        })
+        this.filterableValues[key] = valuesList
       })
-      this.types = typeList
+
     }
   }
 
@@ -46,8 +49,8 @@ export class NodeFilterPresentationComponent {
     return keys
   }
 
-  handleTypeSelect(type: string, checked: boolean) {
-    console.log(type)
-    console.log(checked)
+  handleTypeSelect(key: string, value: string, checked: boolean) {
+    console.log(key)
+    console.log(value)
   }
 }

@@ -1,7 +1,11 @@
 import { IFormMappingTypeHelper } from "./form-mapping-type-helper";
 
-export interface IAnalysisFilter {
-    types: string[],
+export type IAnalysisFilter =
+    { [key in string]: valuesBoolean }
+
+
+type valuesBoolean = {
+    [key in string]: boolean
 }
 
 type analysiFilterForm = IFormMappingTypeHelper<IAnalysisFilter>

@@ -1,8 +1,8 @@
 <p>Select Code Elements to Display</p>
 <mat-card *ngFor="let filterableKey of filterableKeys" class="p-2 mb-2">
-    <h5>{{filterableKey}}</h5>
-    <div class="d-flex">
-        <mat-checkbox *ngFor="let type of types" (change)="handleTypeSelect(type, $event.checked)">{{type}}
+    <h4>{{filterableKey}}</h4>
+    <div class="d-flex flex-wrap" style="max-height: 150px; overflow: auto;">
+        <mat-checkbox *ngFor="let value of filterableValues[filterableKey]" (change)="handleTypeSelect(filterableKey, value, $event.checked)">{{value}}
         </mat-checkbox>
     </div>
 </mat-card>

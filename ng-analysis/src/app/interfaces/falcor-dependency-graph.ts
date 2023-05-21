@@ -1,9 +1,7 @@
 export interface falcorDependencyGraph {
     nodesById: {
         [key in string]: {
-            name: string,
-            type: string,
-            filePath?: string
+            [key in string | 'name' | 'type' | 'filePath']: string
         }
     },
     nodes: {

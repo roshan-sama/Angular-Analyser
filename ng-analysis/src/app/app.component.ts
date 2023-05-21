@@ -3,6 +3,7 @@ import { HeroService } from 'src/services/hero.service';
 import { analysisOutput } from 'src/utils/analysis-output';
 import { ForceGraph } from 'src/utils/force-graph';
 import { falcorDependencyGraph } from './interfaces/falcor-dependency-graph';
+import { IAnalysisFilter } from './interfaces/analysis-filter';
 
 @Component({
   selector: 'app-root',
@@ -16,19 +17,18 @@ export class AppComponent {
 
   analysisOutput?: falcorDependencyGraph
 
+  filteredOutput?: falcorDependencyGraph
+
   ngOnInit() {
+    this.drawGraph(analysisOutput)
     //@ts-ignore
-    const chart = ForceGraph(analysisOutput, this.chart)
-    this.analysisOutput = analysisOutput
-    console.log(chart, "cht")
-    //@ts-ignore
-    document.getElementById("chart-div")?.appendChild(chart)
+    this.handleFilterChange('')
   }
 
   chart = {
     nodeId: (d: any) => d.value[1],
-    nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]].type,
-    nodeTitle: (d: any) => analysisOutput.nodesById[d.value[1]].name,
+    nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]]['type'],
+    nodeTitle: (d: any) => analysisOutput.nodesById[d.value[1]]['name'],
     //@ts-ignore
     linkStrokeWidth: (l: any) => Math.sqrt(l.value),
     linkSource: ({ source }: falcorDependencyGraph["links"][0]) => source.value[1],
@@ -38,6 +38,29 @@ export class AppComponent {
     //@ts-ignore
     invalidation: null // a promise to stop the simulation when the cell is re-run
   }
+
+  handleFilterChange(filterValues: IAnalysisFilter) {
+    this.filteredOutput = { ...analysisOutput }
+    const nodes = new Set<string>(Object.keys(analysisOutput.nodesById));
+    console.log(nodes, "new node list")
+    // Object.keys(filterValues).forEach((key) => {
+    //   if(this.filteredOutput?.nodesById){
+    //     Object.entries(this.filteredOutput.nodesById).forEach(([nodeId, nodeObject]) => {
+    //       if(nodeObject[key])
+    //     })
+    //   } 
+    // })
+  }
+
+  drawGraph(analysisOutput: falcorDependencyGraph) {
+    //@ts-ignore
+    const chart = ForceGraph(analysisOutput, this.chart)
+    this.analysisOutput = analysisOutput
+    console.log(chart, "cht")
+    //@ts-ignore
+    document.getElementById("chart-div")?.appendChild(chart)
+  }
+
 }
 
 //TODO: Distinguish between arrow functions, and const, var and let variables in naming using 

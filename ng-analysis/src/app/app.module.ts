@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatExpansionModule} from '@angular/material/expansion';
+import { GraphDisplaySmartComponentComponent } from './components/graph-display-smart-component/graph-display-smart-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RjmTestComponentComponent,
-    NodeFilterPresentationComponent
+    NodeFilterPresentationComponent,
+    GraphDisplaySmartComponentComponent
   ],
   imports: [
     BrowserModule,

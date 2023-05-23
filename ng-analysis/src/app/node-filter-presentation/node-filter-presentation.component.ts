@@ -25,7 +25,7 @@ export class NodeFilterPresentationComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['analysisGraph']?.currentValue) {
-      this.filterableKeys = this.getFilterableKeys(changes['analysisGraph']?.currentValue)
+      this.filterableKeys = Array.from(this.getFilterableKeys(changes['analysisGraph']?.currentValue))
       const nodesObject: falcorDependencyGraph["nodesById"] = changes['analysisGraph']?.currentValue.nodesById
 
       this.filterableKeys.forEach((key) => {
@@ -35,7 +35,7 @@ export class NodeFilterPresentationComponent {
         Object.values(nodesObject).forEach((node) => {
           if (valuesSet[node[key]]) {
             return
-          } else {
+          } else if (node[key] !== undefined){
             valuesSet[node[key]] = true
             valuesList.push(node[key])
           }
@@ -49,12 +49,18 @@ export class NodeFilterPresentationComponent {
   }
 
   getFilterableKeys(graph: falcorDependencyGraph) {
+    const keys = new Set<string>()
+
     const nodesValues = Object.values(graph.nodesById)
     if (!(nodesValues.length > 0)) {
       console.error('Output graph has no nodes in nodesById key')
       return []
     }
-    const keys = Object.keys(nodesValues[0])
+    nodesValues.forEach((nodeValues) => {
+      Object.keys(nodeValues).forEach((nodeProperty) => {
+        keys.add(nodeProperty)
+      })
+    })
     return keys
   }
 

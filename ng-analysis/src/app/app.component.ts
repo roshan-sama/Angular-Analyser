@@ -24,18 +24,18 @@ export class AppComponent {
 
   defaultFilterValues?: IAnalysisFilter
 
-  ngOnInit() {    
+  ngOnInit() {
     this.analysisOutput = analysisOutput
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.drawGraph(analysisOutput)
   }
 
   chart = {
     nodeId: (d: any) => d.value[1],
-    nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]]['type'],
-    nodeTitle: (d: any) => analysisOutput.nodesById[d.value[1]]['name'],
+    nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]]['Type'],
+    nodeTitle: (d: any) => analysisOutput.nodesById[d.value[1]]['Name'],
     //@ts-ignore
     linkStrokeWidth: (l: any) => Math.sqrt(l.value),
     linkSource: ({ source }: falcorDependencyGraph["links"][0]) => source.value[1],
@@ -47,9 +47,10 @@ export class AppComponent {
   }
 
   handleFilterChange(filterValues: IAnalysisFilter) {
-    this.filteredOutput = { ...analysisOutput }
+    this.filteredOutput = structuredClone(analysisOutput)
     const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
 
+    console.log(filterValues)
     // For each key in the filter values, 
     // Loop through each nodeObject and check if that 
     // node object's value, in the filtered Values is enabled or not
@@ -57,20 +58,43 @@ export class AppComponent {
 
       nodeIds.forEach((nodeId) => {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
-          if (analysisOutput.nodesById[nodeId][key] === value && !enabled) {
-            nodeIds.delete(nodeId)
+          if(!enabled){
+            if(analysisOutput.nodesById[nodeId][key] === value){
+              nodeIds.delete(nodeId)
+            }
           }
+          if(enabled){
+            if(analysisOutput.nodesById[nodeId][key] === undefined){
+              nodeIds.delete(nodeId)
+            }
+          }
+          // if ((analysisOutput.nodesById[nodeId][key] === undefined) && !enabled) {
+          //   console.log("h1")
+          //   return
+          // }
+          // if ((analysisOutput.nodesById[nodeId][key] !== value) && enabled) {
+          //   if (enabled) {
+          //     console.log("nodeId", nodeId)
+          //     console.log("key", key)
+          //     console.log("value", value)
+          //     console.log('obtaining', analysisOutput.nodesById[nodeId][key])
+          //   }
+          //   nodeIds.delete(nodeId)
+          // }
+          // if ((analysisOutput.nodesById[nodeId][key] === value) && !enabled) {
+          //   console.log("h3")
+          //   nodeIds.delete(nodeId)
+          // }
         })
       })
     })
 
     // TODO: Hardcoding id as second element here, ensure no side effects
-    this.filteredOutput.nodes = this.filteredOutput.nodes.filter((node) => nodeIds.has(node.value[1]))
-    this.filteredOutput.links = this.filteredOutput.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
+    this.filteredOutput!.nodes = this.analysisOutput!.nodes.filter((node) => nodeIds.has(node.value[1]))
+    this.filteredOutput!.links = this.analysisOutput!.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
 
-    console.log("Final node Ids", nodeIds)
-
-    this.drawGraph(this.filteredOutput)
+    console.debug("Final Node Ids post filter: ", nodeIds)
+    this.drawGraph(this.filteredOutput!)
   }
 
   drawGraph(analysisOutput: falcorDependencyGraph) {
@@ -79,11 +103,11 @@ export class AppComponent {
     console.log(chart, "cht")
 
     const chartDiv = document.querySelector('#chart-div')
-    if(chartDiv){
+    if (chartDiv) {
       chartDiv.innerHTML = ''
       //@ts-ignore
       chartDiv.appendChild(chart)
-    } else{
+    } else {
       console.error(`chartDiv element wasn't selectable`)
     }
   }
@@ -96,5 +120,5 @@ export const valueitem = () => {
   console.log("test")
 }
 
-export var gly = ''
-export let hluy = gly + '20'
+export var testVariable1 = ''
+export let referencerLetVariable = testVariable1 + '20'

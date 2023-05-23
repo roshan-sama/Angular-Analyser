@@ -11,6 +11,9 @@ let declarationType
 let nodeName = ''
 let initializer = ''
 
+let serviceDecorator;
+let issuesList = []
+
 const syntaxKindToNodeObjectMap = {
     [tsMorph.SyntaxKind.SourceFile]: (node) => {
         return {
@@ -39,6 +42,7 @@ const syntaxKindToNodeObjectMap = {
      * @returns {typedefs.NodeObjectWithId}
      */
     [tsMorph.SyntaxKind.ClassDeclaration]: (node) => {
+        issuesList = {}
         //TODO: Enable users to select decorators to obtain in main file
         // Would be a useful feature
         classKind = undefined
@@ -50,6 +54,16 @@ const syntaxKindToNodeObjectMap = {
         if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
             classKind = 'Service'
             nodeType = 'Angular Service'
+            serviceDecorator = node.getDecorators().find((decorator) => decorator.getName() === 'Injectable')
+            if (serviceDecorator.getArguments().length === 0) {
+                issuesList['Service DI Warning'] = "Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
+            } else {
+                const structure = serviceDecorator.getArguments()[0].getProperties()[0]?.getStructure()
+                if (structure.name !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
+                    issuesList['Service DI Warning'] = "Review Angular Service Injector for accuracy" + serviceDecorator.getText()
+                }
+
+            }
         }
         if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
             classKind = 'Module'
@@ -60,14 +74,16 @@ const syntaxKindToNodeObjectMap = {
         // highest Syntax kind that is one level below the source file that references
         // the Identifier
         nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
-        return {
+        const finalNode = {
             nodeObject: {
                 Name: nodeName,
                 Type: nodeType,
-                'File Path': node.getSourceFile().getFilePath()
+                'File Path': node.getSourceFile().getFilePath(),
+                ...issuesList
             },
             id: getNodeId(node.getSourceFile(), nodeName)
         }
+        return finalNode
     },
     /**
      * Function for handling VariableDeclaration nodes.
@@ -108,7 +124,7 @@ const getNodeObject = (node) => {
     if (handler) {
         nodeToReturn = handler(node)
         return nodeToReturn;
-    }else {
+    } else {
         console.error("No mapping to obtain node information for node type " + node.getKindName())
     }
     // add your else case here, if required

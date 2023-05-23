@@ -21,6 +21,8 @@ export class AppComponent {
   analysisOutput?: falcorDependencyGraph
 
   filteredOutput?: falcorDependencyGraph
+  filterPropertiesToEnabledCountMap: { [key in string]: number } = {}
+  filterPropertiesTotalValuesMap: { [key in string]: number } = {}
 
   defaultFilterValues?: IAnalysisFilter
 
@@ -60,15 +62,15 @@ export class AppComponent {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
           // Remove nodes from the list if their value matches the filter value and
           // the filter value is not enabled for display
-          if(!enabled){
-            if(analysisOutput.nodesById[nodeId][key] === value){
+          if (!enabled) {
+            if (analysisOutput.nodesById[nodeId][key] === value) {
               nodeIds.delete(nodeId)
             }
           }
           // If the current key is enabled, but the value for the key in the node is undefined, 
           // remove the node
-          if(enabled){
-            if(analysisOutput.nodesById[nodeId][key] === undefined){
+          if (enabled) {
+            if (analysisOutput.nodesById[nodeId][key] === undefined) {
               nodeIds.delete(nodeId)
             }
           }
@@ -79,6 +81,25 @@ export class AppComponent {
     // TODO: Hardcoding id as second element here, ensure no side effects
     this.filteredOutput!.nodes = this.analysisOutput!.nodes.filter((node) => nodeIds.has(node.value[1]))
     this.filteredOutput!.links = this.analysisOutput!.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
+
+    const tempPropertiesToEnabledCountMap: { [key in string]: number } = {} = {}
+    const tempPropertiesToCountMap: { [key in string]: number } = {} = {}
+    Object.keys(filterValues).forEach((key) => {
+      let currentEnabledKeyTotal = 0
+      let currentKeyTotal = 0
+
+      Object.keys(filterValues[key]).forEach((value) => {
+        if (filterValues[key][value]) {
+          currentEnabledKeyTotal++
+        }
+        currentKeyTotal++
+      })
+
+      tempPropertiesToEnabledCountMap[key] = currentEnabledKeyTotal
+      tempPropertiesToCountMap[key] = currentKeyTotal
+    })
+    this.filterPropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
+    this.filterPropertiesTotalValuesMap = tempPropertiesToCountMap
 
     console.debug("Final Node Ids post filter: ", nodeIds)
     this.drawGraph(this.filteredOutput!)

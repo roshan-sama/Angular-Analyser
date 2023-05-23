@@ -76,6 +76,8 @@
     <div class="row align-items-center">
       <node-filter-presentation
         [analysisGraph]="analysisOutput"
+        [filterPropertiesToEnabledCountMap]="filterPropertiesToEnabledCountMap"
+        [filterPropertiesTotalValuesMap]="filterPropertiesTotalValuesMap"
         (filterChangeEvent)="handleFilterChange($event)"
         class="d-block col-12 col-md-6"
       ></node-filter-presentation>

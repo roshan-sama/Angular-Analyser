@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import { GraphDisplaySmartComponentComponent } from './components/graph-display-smart-component/graph-display-smart-component.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GraphDisplaySmartComponentComponent } from './components/graph-display-
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

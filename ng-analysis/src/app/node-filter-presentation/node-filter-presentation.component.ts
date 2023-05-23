@@ -11,6 +11,8 @@ import { analysisOutput } from 'src/utils/analysis-output';
 })
 export class NodeFilterPresentationComponent {
   @Input() analysisGraph?: falcorDependencyGraph
+  @Input() filterPropertiesToEnabledCountMap: { [key in string]: number } = {}
+  @Input() filterPropertiesTotalValuesMap: { [key in string]: number } = {}
 
   @Output() filterChangeEvent: EventEmitter<IAnalysisFilter> = new EventEmitter()
 
@@ -20,7 +22,20 @@ export class NodeFilterPresentationComponent {
   filteredObject: IAnalysisFilter = {}
 
   constructor() {
+    this.filterChangeEvent.subscribe((filteredObject) => {
 
+      Object.keys(filteredObject).forEach((key) => {
+        let currentKeyTotal = 0
+
+        Object.keys(filteredObject[key]).forEach((value) => {
+          if (filteredObject[key][value]) {
+            currentKeyTotal++
+          }
+        })
+
+        this.filterPropertiesToEnabledCountMap[key] = currentKeyTotal
+      })
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -45,8 +60,12 @@ export class NodeFilterPresentationComponent {
         this.filteredObject[key] = valuesSet
       })
 
-      console.log(this.filteredObject, "filt object at end")
+      console.debug(this.filteredObject, "filt object at end")
     }
+  }
+
+  ngOnInit() {
+    this.filterChangeEvent.emit(this.filteredObject)
   }
 
   getFilterableKeys(graph: falcorDependencyGraph) {
@@ -91,4 +110,21 @@ export class NodeFilterPresentationComponent {
     this.filteredObject[key][value] = checked
     this.filterChangeEvent.emit(this.filteredObject)
   }
+
+  handleCheckAll(key: string, $event: any) {
+    $event.stopPropagation();
+    Object.keys(this.filteredObject[key]).forEach((value) => {
+      this.filteredObject[key][value] = true
+    })
+    this.filterChangeEvent.emit(this.filteredObject)
+  }
+
+  handleUncheckAll(key: string, $event: any) {
+    $event.stopPropagation();
+    Object.keys(this.filteredObject[key]).forEach((value) => {
+      this.filteredObject[key][value] = false
+    })
+    this.filterChangeEvent.emit(this.filteredObject)
+  }
+
 }

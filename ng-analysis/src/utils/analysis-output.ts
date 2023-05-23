@@ -16,7 +16,8 @@ export const analysisOutput: falcorDependencyGraph =
     "1: app.component - AppComponent (Component)": {
       "Name": "AppComponent (Component)",
       "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
+      "Service DI Warning": "AppComponent: Review Angular Service Injector for injected services"
     },
     "2: analysis-output - analysisOutput (const)": {
       "Name": "analysisOutput (const)",
@@ -32,13 +33,13 @@ export const analysisOutput: falcorDependencyGraph =
       "Name": "NonRootServiceExample (Service)",
       "Type": "Angular Service",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/non-root-service-example.ts",
-      "Service DI Warning": "Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
+      "Service DI Error": "NonRootServiceExample: Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
     },
     "5: invalid-injectable-service - InvalidInjectableService (Service)": {
       "Name": "InvalidInjectableService (Service)",
       "Type": "Angular Service",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/invalid-injectable-service.ts",
-      "Service DI Warning": "Review Angular Service Injector for accuracy@Injectable({\n  providedIn: 'any'\n})"
+      "Service DI Error": "InvalidInjectableService: Angular Service Injector is not provided in root: @Injectable({\n  providedIn: 'any'\n})"
     },
     "6: hero.service - HeroService (Service)": {
       "Name": "HeroService (Service)",
@@ -598,6 +599,22 @@ export const analysisOutput: falcorDependencyGraph =
         "value": [
           "nodesById",
           "1: app.component - app.component.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: app.component - AppComponent (Component)"
         ]
       }
     },

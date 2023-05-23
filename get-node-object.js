@@ -47,23 +47,46 @@ const syntaxKindToNodeObjectMap = {
         // Would be a useful feature
         classKind = undefined
         nodeType = 'Class'
-        if (node.getDecorators().some((decorator) => decorator.getName() === 'Component')) {
+
+        const isComponent = node.getDecorators().some((decorator) => decorator.getName() === 'Component')
+
+        if (isComponent) {
+            issuesList = {}
             classKind = 'Component'
             nodeType = 'Angular Component'
+            serviceDecorator = node.getDecorators().find((decorator) => decorator.getName() === 'Component')
+
+            const properties = serviceDecorator.getArguments()[0].getProperties()
+            if (properties.length) {
+                const providerProperty = properties.find((property) => property.getStructure().name === 'providers')
+                if(providerProperty){
+                    issuesList['Service DI Warning'] = node.getName() + ": Review Angular Service Injector for injected services"
+                }
+            }
+
+            // if (structure.providers !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
+            //     issuesList['Service DI Warning'] = "Review Angular Service Injector for accuracy" + serviceDecorator.getText()
+            // }
+
         }
         if (node.getDecorators().some((decorator) => decorator.getName() === 'Injectable')) {
             classKind = 'Service'
             nodeType = 'Angular Service'
+            // TODO: Refactor till end region
+            //#region refactor region 1
             serviceDecorator = node.getDecorators().find((decorator) => decorator.getName() === 'Injectable')
+
             if (serviceDecorator.getArguments().length === 0) {
-                issuesList['Service DI Warning'] = "Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
+                issuesList['Service DI Error'] = node.getName() + ": Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
             } else {
                 const structure = serviceDecorator.getArguments()[0].getProperties()[0]?.getStructure()
                 if (structure.name !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
-                    issuesList['Service DI Warning'] = "Review Angular Service Injector for accuracy" + serviceDecorator.getText()
+                    issuesList['Service DI Error'] = node.getName() + ": Angular Service Injector is not provided in root: " + serviceDecorator.getText()
                 }
 
             }
+            //#region refactor region 1
+
         }
         if (node.getDecorators().some((decorator) => decorator.getName() === 'NgModule')) {
             classKind = 'Module'

@@ -58,33 +58,20 @@ export class AppComponent {
 
       nodeIds.forEach((nodeId) => {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
+          // Remove nodes from the list if their value matches the filter value and
+          // the filter value is not enabled for display
           if(!enabled){
             if(analysisOutput.nodesById[nodeId][key] === value){
               nodeIds.delete(nodeId)
             }
           }
+          // If the current key is enabled, but the value for the key in the node is undefined, 
+          // remove the node
           if(enabled){
             if(analysisOutput.nodesById[nodeId][key] === undefined){
               nodeIds.delete(nodeId)
             }
           }
-          // if ((analysisOutput.nodesById[nodeId][key] === undefined) && !enabled) {
-          //   console.log("h1")
-          //   return
-          // }
-          // if ((analysisOutput.nodesById[nodeId][key] !== value) && enabled) {
-          //   if (enabled) {
-          //     console.log("nodeId", nodeId)
-          //     console.log("key", key)
-          //     console.log("value", value)
-          //     console.log('obtaining', analysisOutput.nodesById[nodeId][key])
-          //   }
-          //   nodeIds.delete(nodeId)
-          // }
-          // if ((analysisOutput.nodesById[nodeId][key] === value) && !enabled) {
-          //   console.log("h3")
-          //   nodeIds.delete(nodeId)
-          // }
         })
       })
     })

@@ -34,42 +34,48 @@ export const analysisOutput: falcorDependencyGraph =
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/non-root-service-example.ts",
       "Service DI Warning": "Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
     },
-    "5: hero.service - HeroService (Service)": {
+    "5: invalid-injectable-service - InvalidInjectableService (Service)": {
+      "Name": "InvalidInjectableService (Service)",
+      "Type": "Angular Service",
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/invalid-injectable-service.ts",
+      "Service DI Warning": "Review Angular Service Injector for accuracy@Injectable({\n  providedIn: 'any'\n})"
+    },
+    "6: hero.service - HeroService (Service)": {
       "Name": "HeroService (Service)",
       "Type": "Angular Service",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.ts"
     },
-    "6: hero.service.spec - hero.service.spec.ts": {
+    "7: hero.service.spec - hero.service.spec.ts": {
       "Name": "hero.service.spec.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.spec.ts"
     },
-    "6: hero.service.spec - service (let)": {
+    "7: hero.service.spec - service (let)": {
       "Name": "service (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.spec.ts"
     },
-    "7: app.module - AppModule (Module)": {
+    "8: app.module - AppModule (Module)": {
       "Name": "AppModule (Module)",
       "Type": "Angular Module",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts"
     },
-    "8: main - main.ts": {
+    "9: main - main.ts": {
       "Name": "main.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/main.ts"
     },
-    "7: app.module - app.module.ts": {
+    "8: app.module - app.module.ts": {
       "Name": "app.module.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts"
     },
-    "9: app.component.spec - app.component.spec.ts": {
+    "10: app.component.spec - app.component.spec.ts": {
       "Name": "app.component.spec.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.spec.ts"
     },
-    "9: app.component.spec - fixture (const)": {
+    "10: app.component.spec - fixture (const)": {
       "Name": "fixture (const)",
       "Type": "Const",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.spec.ts"
@@ -79,42 +85,42 @@ export const analysisOutput: falcorDependencyGraph =
       "Type": "Arrow Function",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
-    "1: app.component - gly (var)": {
-      "Name": "gly (var)",
+    "1: app.component - testVariable1 (var)": {
+      "Name": "testVariable1 (var)",
       "Type": "Var variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
-    "1: app.component - hluy (let)": {
-      "Name": "hluy (let)",
+    "1: app.component - referencerLetVariable (let)": {
+      "Name": "referencerLetVariable (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
     },
-    "10: app-routing.module - AppRoutingModule (Module)": {
+    "11: app-routing.module - AppRoutingModule (Module)": {
       "Name": "AppRoutingModule (Module)",
       "Type": "Angular Module",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts"
     },
-    "10: app-routing.module - routes (const)": {
+    "11: app-routing.module - routes (const)": {
       "Name": "routes (const)",
       "Type": "Const",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts"
     },
-    "11: rjm-test-component.component - RjmTestComponentComponent (Component)": {
+    "12: rjm-test-component.component - RjmTestComponentComponent (Component)": {
       "Name": "RjmTestComponentComponent (Component)",
       "Type": "Angular Component",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.ts"
     },
-    "12: rjm-test-component.component.spec - rjm-test-component.component.spec.ts": {
+    "13: rjm-test-component.component.spec - rjm-test-component.component.spec.ts": {
       "Name": "rjm-test-component.component.spec.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts"
     },
-    "12: rjm-test-component.component.spec - component (let)": {
+    "13: rjm-test-component.component.spec - component (let)": {
       "Name": "component (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts"
     },
-    "12: rjm-test-component.component.spec - fixture (let)": {
+    "13: rjm-test-component.component.spec - fixture (let)": {
       "Name": "fixture (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts"
@@ -124,37 +130,37 @@ export const analysisOutput: falcorDependencyGraph =
       "Type": "Angular Component",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.ts"
     },
-    "13: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts": {
+    "14: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts": {
       "Name": "node-filter-presentation.component.spec.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.spec.ts"
     },
-    "13: node-filter-presentation.component.spec - component (let)": {
+    "14: node-filter-presentation.component.spec - component (let)": {
       "Name": "component (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.spec.ts"
     },
-    "13: node-filter-presentation.component.spec - fixture (let)": {
+    "14: node-filter-presentation.component.spec - fixture (let)": {
       "Name": "fixture (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.spec.ts"
     },
-    "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)": {
+    "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)": {
       "Name": "GraphDisplaySmartComponentComponent (Component)",
       "Type": "Angular Component",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.ts"
     },
-    "15: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts": {
+    "16: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts": {
       "Name": "graph-display-smart-component.component.spec.ts",
       "Type": "Source File",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.spec.ts"
     },
-    "15: graph-display-smart-component.component.spec - component (let)": {
+    "16: graph-display-smart-component.component.spec - component (let)": {
       "Name": "component (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.spec.ts"
     },
-    "15: graph-display-smart-component.component.spec - fixture (let)": {
+    "16: graph-display-smart-component.component.spec - fixture (let)": {
       "Name": "fixture (let)",
       "Type": "Let variable",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.spec.ts"
@@ -207,56 +213,63 @@ export const analysisOutput: falcorDependencyGraph =
       "$type": "ref",
       "value": [
         "nodesById",
-        "5: hero.service - HeroService (Service)"
+        "5: invalid-injectable-service - InvalidInjectableService (Service)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "6: hero.service.spec - hero.service.spec.ts"
+        "6: hero.service - HeroService (Service)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "6: hero.service.spec - service (let)"
+        "7: hero.service.spec - hero.service.spec.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "7: app.module - AppModule (Module)"
+        "7: hero.service.spec - service (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "8: main - main.ts"
+        "8: app.module - AppModule (Module)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "7: app.module - app.module.ts"
+        "9: main - main.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "9: app.component.spec - app.component.spec.ts"
+        "8: app.module - app.module.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "9: app.component.spec - fixture (const)"
+        "10: app.component.spec - app.component.spec.ts"
+      ]
+    },
+    {
+      "$type": "ref",
+      "value": [
+        "nodesById",
+        "10: app.component.spec - fixture (const)"
       ]
     },
     {
@@ -270,56 +283,56 @@ export const analysisOutput: falcorDependencyGraph =
       "$type": "ref",
       "value": [
         "nodesById",
-        "1: app.component - gly (var)"
+        "1: app.component - testVariable1 (var)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "1: app.component - hluy (let)"
+        "1: app.component - referencerLetVariable (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "10: app-routing.module - AppRoutingModule (Module)"
+        "11: app-routing.module - AppRoutingModule (Module)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "10: app-routing.module - routes (const)"
+        "11: app-routing.module - routes (const)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "12: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        "13: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "12: rjm-test-component.component.spec - component (let)"
+        "13: rjm-test-component.component.spec - component (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "12: rjm-test-component.component.spec - fixture (let)"
+        "13: rjm-test-component.component.spec - fixture (let)"
       ]
     },
     {
@@ -333,49 +346,49 @@ export const analysisOutput: falcorDependencyGraph =
       "$type": "ref",
       "value": [
         "nodesById",
-        "13: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        "14: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "13: node-filter-presentation.component.spec - component (let)"
+        "14: node-filter-presentation.component.spec - component (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "13: node-filter-presentation.component.spec - fixture (let)"
+        "14: node-filter-presentation.component.spec - fixture (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "15: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        "16: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "15: graph-display-smart-component.component.spec - component (let)"
+        "16: graph-display-smart-component.component.spec - component (let)"
       ]
     },
     {
       "$type": "ref",
       "value": [
         "nodesById",
-        "15: graph-display-smart-component.component.spec - fixture (let)"
+        "16: graph-display-smart-component.component.spec - fixture (let)"
       ]
     }
   ],
@@ -552,6 +565,22 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
+          "1: app.component - AppComponent (Component)"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "2: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
           "3: node-filter-presentation.component - node-filter-presentation.component.ts"
         ]
       }
@@ -561,7 +590,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "5: hero.service - HeroService (Service)"
+          "6: hero.service - HeroService (Service)"
         ]
       },
       "target": {
@@ -577,7 +606,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "5: hero.service - HeroService (Service)"
+          "6: hero.service - HeroService (Service)"
         ]
       },
       "target": {
@@ -593,14 +622,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "5: hero.service - HeroService (Service)"
+          "6: hero.service - HeroService (Service)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "6: hero.service.spec - hero.service.spec.ts"
+          "7: hero.service.spec - hero.service.spec.ts"
         ]
       }
     },
@@ -609,14 +638,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "5: hero.service - HeroService (Service)"
+          "6: hero.service - HeroService (Service)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "6: hero.service.spec - service (let)"
+          "7: hero.service.spec - service (let)"
         ]
       }
     },
@@ -625,14 +654,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "5: hero.service - HeroService (Service)"
+          "6: hero.service - HeroService (Service)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "6: hero.service.spec - hero.service.spec.ts"
+          "7: hero.service.spec - hero.service.spec.ts"
         ]
       }
     },
@@ -641,14 +670,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "8: main - main.ts"
+          "9: main - main.ts"
         ]
       }
     },
@@ -657,30 +686,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "8: main - main.ts"
-        ]
-      }
-    },
-    {
-      "source": {
-        "$type": "ref",
-        "value": [
-          "nodesById",
-          "1: app.component - AppComponent (Component)"
-        ]
-      },
-      "target": {
-        "$type": "ref",
-        "value": [
-          "nodesById",
-          "7: app.module - app.module.ts"
+          "9: main - main.ts"
         ]
       }
     },
@@ -696,7 +709,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - app.module.ts"
         ]
       }
     },
@@ -712,7 +725,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -728,7 +741,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "9: app.component.spec - app.component.spec.ts"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -744,7 +757,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "9: app.component.spec - app.component.spec.ts"
+          "10: app.component.spec - app.component.spec.ts"
         ]
       }
     },
@@ -760,7 +773,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "9: app.component.spec - fixture (const)"
+          "10: app.component.spec - app.component.spec.ts"
         ]
       }
     },
@@ -776,7 +789,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "9: app.component.spec - fixture (const)"
+          "10: app.component.spec - fixture (const)"
         ]
       }
     },
@@ -792,7 +805,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "9: app.component.spec - fixture (const)"
+          "10: app.component.spec - fixture (const)"
         ]
       }
     },
@@ -801,14 +814,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "1: app.component - gly (var)"
+          "1: app.component - AppComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "1: app.component - hluy (let)"
+          "10: app.component.spec - fixture (const)"
         ]
       }
     },
@@ -817,14 +830,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "10: app-routing.module - AppRoutingModule (Module)"
+          "1: app.component - testVariable1 (var)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - app.module.ts"
+          "1: app.component - referencerLetVariable (let)"
         ]
       }
     },
@@ -833,14 +846,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "10: app-routing.module - AppRoutingModule (Module)"
+          "11: app-routing.module - AppRoutingModule (Module)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - app.module.ts"
         ]
       }
     },
@@ -849,14 +862,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "10: app-routing.module - routes (const)"
+          "11: app-routing.module - AppRoutingModule (Module)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "10: app-routing.module - AppRoutingModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -865,14 +878,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "11: app-routing.module - routes (const)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - app.module.ts"
+          "11: app-routing.module - AppRoutingModule (Module)"
         ]
       }
     },
@@ -881,14 +894,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - app.module.ts"
         ]
       }
     },
@@ -897,14 +910,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "12: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -913,14 +926,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "12: rjm-test-component.component.spec - component (let)"
+          "13: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
         ]
       }
     },
@@ -929,14 +942,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "12: rjm-test-component.component.spec - fixture (let)"
+          "13: rjm-test-component.component.spec - component (let)"
         ]
       }
     },
@@ -945,14 +958,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "12: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+          "13: rjm-test-component.component.spec - fixture (let)"
         ]
       }
     },
@@ -961,14 +974,30 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "11: rjm-test-component.component - RjmTestComponentComponent (Component)"
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "12: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+          "13: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      }
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "13: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
         ]
       }
     },
@@ -984,7 +1013,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - app.module.ts"
+          "8: app.module - app.module.ts"
         ]
       }
     },
@@ -1000,7 +1029,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -1016,7 +1045,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "13: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+          "14: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
         ]
       }
     },
@@ -1032,7 +1061,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "13: node-filter-presentation.component.spec - component (let)"
+          "14: node-filter-presentation.component.spec - component (let)"
         ]
       }
     },
@@ -1048,7 +1077,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "13: node-filter-presentation.component.spec - fixture (let)"
+          "14: node-filter-presentation.component.spec - fixture (let)"
         ]
       }
     },
@@ -1064,7 +1093,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "13: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+          "14: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
         ]
       }
     },
@@ -1080,7 +1109,7 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "13: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+          "14: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
         ]
       }
     },
@@ -1089,14 +1118,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - app.module.ts"
+          "8: app.module - app.module.ts"
         ]
       }
     },
@@ -1105,14 +1134,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "7: app.module - AppModule (Module)"
+          "8: app.module - AppModule (Module)"
         ]
       }
     },
@@ -1121,14 +1150,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "15: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+          "16: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
         ]
       }
     },
@@ -1137,14 +1166,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "15: graph-display-smart-component.component.spec - component (let)"
+          "16: graph-display-smart-component.component.spec - component (let)"
         ]
       }
     },
@@ -1153,14 +1182,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "15: graph-display-smart-component.component.spec - fixture (let)"
+          "16: graph-display-smart-component.component.spec - fixture (let)"
         ]
       }
     },
@@ -1169,14 +1198,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "15: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+          "16: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
         ]
       }
     },
@@ -1185,14 +1214,14 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
-          "14: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+          "15: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
         ]
       },
       "target": {
         "$type": "ref",
         "value": [
           "nodesById",
-          "15: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+          "16: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
         ]
       }
     }

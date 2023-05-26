@@ -13,13 +13,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { GraphDisplaySmartComponentComponent } from './components/graph-display-smart-component/graph-display-smart-component.component';
 import {MatButtonModule} from '@angular/material/button';
+import { LinkFilterPresentationComponent } from './link-filter-presentation/link-filter-presentation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RjmTestComponentComponent,
     NodeFilterPresentationComponent,
-    GraphDisplaySmartComponentComponent
+    GraphDisplaySmartComponentComponent,
+    LinkFilterPresentationComponent
   ],
   imports: [
     BrowserModule,

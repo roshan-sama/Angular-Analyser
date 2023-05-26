@@ -15,8 +15,9 @@
 //TODO: Add link type so that users know what type of reference occurred?
 /**
  * @typedef {Object} LinkObject
- * @property {RefObject} source - The source of the link.
- * @property {RefObject} target - The target of the link.
+ * @property {RefObject} Source - The source of the link.
+ * @property {RefObject} Target - The target of the link.
+ * @property {linkType} Type - The type of the node.
  */
 
 /**
@@ -29,6 +30,12 @@
 /**
  * @typedef {Object} NodeObjectWithId
  * @property {NodeObject} nodeObject - The Node Object 
+ * @property {string} id - The unique identifier associated with the node object
+ */
+
+/**
+ * @typedef {Object} LinkObjectWithId
+ * @property {LinkObject} nodeObject - The Node Object 
  * @property {string} id - The unique identifier associated with the node object
  */
 

@@ -10,7 +10,7 @@ const project = new tsMorph.Project({
 });
 
 const pattern = "ng-analysis/**/*.ts";
-const files = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] });
+const typescriptFiles = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] });
 
 let analysisSourceFile
 let analysisNode
@@ -20,6 +20,7 @@ let sourceFilename
 let sourceNodeObject
 let sourceId = ''
 
+/** @type {typedefs.NodeObjectWithId} */
 let parentIdentifier
 
 /** @type {typedefs.FalcorDependencyGraph} */
@@ -29,7 +30,14 @@ let dependencyGraph = {
     links: []
 }
 
-files.forEach((file) => {
+/** @type {typedefs.NodesByIdMap} */
+const nodesByIdMap = new Map()
+
+/** @type {typedefs.RawNodesByIdMap} */
+const rawNodesByIdMap = new Map()
+
+// Typescript file analysis
+typescriptFiles.forEach((file) => {
 
     analysisSourceFile = project.getSourceFile(file)
     sourceFilename = analysisSourceFile.getFilePath()
@@ -38,10 +46,28 @@ files.forEach((file) => {
     // Sub types and other information as seen in getNodeType so taht CLasses can 
     // has components, service etc. subtypes based on decorators etc,
     // finalNodeTypes in getParentIdentifier also needs to make sure its stops searches if these nodes are found
-    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getClasses())
-    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getFunctions())
-    analyzeFile(analysisSourceFile, (sourceFile) => sourceFile.getVariableDeclarations())
+    analyzeFileForNodes(analysisSourceFile, (sourceFile) => sourceFile.getClasses())
+    analyzeFileForNodes(analysisSourceFile, (sourceFile) => sourceFile.getFunctions())
+    analyzeFileForNodes(analysisSourceFile, (sourceFile) => sourceFile.getVariableDeclarations())
+
 })
+
+// Add nodes obtained to graph
+nodesByIdMap.forEach((node, id) => {
+    dependencyGraph.nodesById[id] = node
+
+    dependencyGraph.nodes.push({
+        $type: "ref",
+        value: [
+            "nodesById",
+            id
+        ]
+    })
+})
+
+// Analyze links between Nodes
+createLinksForNodes(rawNodesByIdMap, nodesByIdMap)
+
 
 /**
  * Analyze a file for a type of Code element such as Class, Function etc.
@@ -49,30 +75,32 @@ files.forEach((file) => {
  * @param {typedefs.processSourceFileCallback} getNodeElements - The call expression to get the function identifier from.
  * @returns {undefined} 
  */
-function analyzeFile(analysisSourceFile, getNodeElements) {
+function analyzeFileForNodes(analysisSourceFile, getNodeElements) {
     for (analysisNode of getNodeElements(analysisSourceFile)) {
 
         sourceNodeObject = getNodeObject(analysisNode)
-        sourceId = sourceNodeObject.id
 
-        if (!dependencyGraph.nodesById[sourceId]) {
-            dependencyGraph.nodesById[sourceId] = sourceNodeObject.nodeObject
+        nodesByIdMap.set(sourceNodeObject.id, sourceNodeObject.nodeObject)
+        rawNodesByIdMap.set(sourceNodeObject.id, analysisNode)
+    }
+}
 
-            dependencyGraph.nodes.push({
-                $type: "ref",
-                value: [
-                    "nodesById",
-                    sourceId
-                ]
-            })
-        }
+/**
+ * Analyze nodes for links between them
+ * @param {typedefs.NodesByIdMap} nodesByIdMap - The call expression to get the function identifier from.
+ * @param {typedefs.RawNodesByIdMap} rawNodesByIdMap
+ * @returns {undefined}
+ */
+function createLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
+    rawNodesByIdMap.forEach((node, id) => {
+        for (reference of node.findReferencesAsNodes()) {
 
-        for (reference of analysisNode.findReferencesAsNodes()) {
+            parentIdentifier = getParentIdentifier.getFinalParentNode(reference, nodesByIdMap)
+            console.log("New Link", id + " -> " + parentIdentifier.id)
 
-            parentIdentifier = getParentIdentifier.getFinalParentNode(reference)
-            console.log("New Link", sourceId + " -> " + parentIdentifier.id)
             if (!dependencyGraph.nodesById[parentIdentifier.id]) {
                 dependencyGraph.nodesById[parentIdentifier.id] = parentIdentifier.nodeObject
+
                 dependencyGraph.nodes.push({
                     $type: "ref",
                     value: [
@@ -87,7 +115,7 @@ function analyzeFile(analysisSourceFile, getNodeElements) {
                     $type: "ref",
                     "value": [
                         "nodesById",
-                        sourceId
+                        id
                     ],
                 },
                 target: {
@@ -96,11 +124,12 @@ function analyzeFile(analysisSourceFile, getNodeElements) {
                         "nodesById",
                         parentIdentifier.id
                     ],
-                }
+                },
+                linkType: 'Reference'
             })
         }
 
-    }
+    })
 }
 
 const fileOutput = `import { falcorDependencyGraph } from "src/app/interfaces/falcor-dependency-graph";

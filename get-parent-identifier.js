@@ -8,6 +8,7 @@ const finalNodeTypes = {
     [tsMorph.SyntaxKind.SourceFile]: 308,
     [tsMorph.SyntaxKind.VariableDeclaration]: 257,
 }
+
 let parentNode
 let highestValidNode = undefined
 let nodeToReturn
@@ -15,38 +16,51 @@ let nodeToReturn
 /**
  * Gets the identifier of the function called in a call expression.
  * @param {tsMorph.Node} node - The call expression to get the function identifier from.
+ * @param {typedefs.NodesByIdMap} nodesByIdMap - The map of nodes indexed by string id
  * @returns {typedefs.NodeObjectWithId} The identifier of the function, or undefined if not found.
  */
-const getFinalParentNode = (node) => {
+const getFinalParentNode = (node, nodesByIdMap) => {
     highestValidNode = undefined
-    return getFinalParentNodeRecursive(node)
+    return getFinalParentNodeRecursive(node, nodesByIdMap)
 }
 
-const getFinalParentNodeRecursive = (node) => {
+/**
+ * Recursively traverses up the AST to get the final valid parent node referencing the start node
+ * @param {tsMorph.Node} node - The call expression to get the function identifier from.
+ * @param {typedefs.NodesByIdMap} nodesByIdMap - The map of nodes indexed by string id
+ * @returns {typedefs.NodeObjectWithId} The identifier of the function, or undefined if not found.
+ */
+const getFinalParentNodeRecursive = (node, nodesByIdMap) => {
     parentNode = node.getParent();
 
     // If the parent node isn't part of one of the potential final nodes, keep searching
-    // Highest node is source file, which is part of the final nodses list
+    // Highest node is source file, which is part of the final nodes list
     if (finalNodeTypes[parentNode.getKind()] === undefined) {
-        return getFinalParentNodeRecursive(parentNode)
+        return getFinalParentNodeRecursive(parentNode, nodesByIdMap)
     }
 
     // If the parent node isn't source file, but one of the other final nodes, update
     // the highest valid node, and keep searching for a higher final node
     if (parentNode.getKind() !== tsMorph.SyntaxKind.SourceFile) {
         highestValidNode = parentNode
-        return getFinalParentNodeRecursive(parentNode)
+        return getFinalParentNodeRecursive(parentNode, nodesByIdMap)
     }
 
     // If the parent is a source file, we've reached the end.
-    // If we found a valid final parent node, return that. If not, return the source file
-    if (highestValidNode !== undefined) {
-        nodeToReturn = highestValidNode
-    } else {
-        nodeToReturn = parentNode
+
+    // If we found a valid final parent node and the highest parent node doesn't exist
+    // return that. If not, return the source file
+    const parentNodeObject = getNodeObject(parentNode)
+    if (highestValidNode === undefined) {
+        return parentNodeObject
     }
 
-    return getNodeObject(nodeToReturn)
+    const highestNodeObject = getNodeObject(highestValidNode)
+    if(nodesByIdMap.has(highestNodeObject.id)){
+        return highestNodeObject
+    }
+    
+    return parentNodeObject
 }
 
 module.exports = {

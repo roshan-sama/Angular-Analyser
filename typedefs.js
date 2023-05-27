@@ -50,6 +50,12 @@
 /**
  * @typedef {"Component" | "Service" | "Module"} classSubType
  * */
+
+
+/** @typedef {Map<string, typedefs.NodeObject>} NodesByIdMap */
+/** @typedef {Map<string, typedefs.NodeObject>} RawNodesByIdMap */
+
+
 /**
  * @typedef {"Class" | "Function" | "Arrow Function" | "Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "Const" | "Let variable" | "Var variable"} classType
  * */

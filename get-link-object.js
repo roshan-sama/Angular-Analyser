@@ -22,19 +22,36 @@ let handler
 let nodeToReturn
 /**
  * Takes in a ts-morph node and generates the Node Object based on the node's SyntaxKind
- * @param {tsMorph.Node} referencedNode - The node being referenced
- * @param {tsMorph.Node} referencingParentNode - The final parent node within which the reference to the above node occurs.
+ * @param {typedefs.NodeObjectWithId} referencedNode - The node being referenced
+ * @param {typedefs.NodeObjectWithId} referencingParentNode - The final parent node within which the reference to the above node occurs.
  * @param {tsMorph.Identifier} referenceIdentifier - The identifier associated of the 
  * @returns {typedefs.Link} The Node Object representing this node
  */
 const getLinkObject = (referencedNode, referencingParentNode, referenceIdentifier) => {
-    handler = linkTypeToLinkObjectMap[];
-    if (handler) {
-        linkToReturn = handler(node)
-        return linkToReturn;
-    } else {
-        console.error("No mapping to obtain node information for node type " + node.getKindName())
+    // handler = linkTypeToLinkObjectMap[];
+    // if (handler) {
+    //     linkToReturn = handler(node)
+    //     return linkToReturn;
+    // } else {
+    //     console.error("No mapping to obtain node information for node type " + node.getKindName())
+    // }
+    const value = {
+        source: {
+            $type: "ref",
+            "value": [
+                "nodesById",
+                referencedNode.id
+            ],
+        },
+        target: {
+            $type: "ref",
+            "value": [
+                "nodesById",
+                referencedNode.id
+            ],
+        }
     }
+    
     // add your else case here, if required
 };
 

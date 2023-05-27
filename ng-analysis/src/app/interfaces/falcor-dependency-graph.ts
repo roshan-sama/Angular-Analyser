@@ -8,7 +8,7 @@ export interface falcorDependencyGraph {
         $type: "ref",
         value: string[]
     }[]
-    links: {
+    links: ({
         source: {
             $type: "ref",
             value: string[]
@@ -17,5 +17,10 @@ export interface falcorDependencyGraph {
             $type: "ref",
             value: string[]
         }
-    }[]
+    } & {
+        [key: string]: string | {
+            $type: "ref",
+            value: string[]
+        };
+    })[]
 }

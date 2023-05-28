@@ -4,6 +4,7 @@
  * @property {string} Name - The name of the node.
  * @property {classType} Type - The type of the node.
  * @property {string} ['File Path'] - The file path of the node, if applicable.
+ * @property {any} ['Non Filterable'] - Any additional information that should not be used for filtering.
  */
 
 /**

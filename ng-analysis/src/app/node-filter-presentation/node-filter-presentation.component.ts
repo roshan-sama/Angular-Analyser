@@ -3,7 +3,6 @@ import { falcorDependencyGraph } from '../interfaces/falcor-dependency-graph';
 import { IAnalysisFilter } from '../interfaces/analysis-filter';
 import { analysisOutput } from 'src/utils/analysis-output';
 
-
 @Component({
   selector: 'node-filter-presentation',
   templateUrl: './node-filter-presentation.component.html',
@@ -103,6 +102,8 @@ export class NodeFilterPresentationComponent {
       }
     })
 
+    codeElementProperties.delete('Non Filterable')
+    propertyPresentInAllNodes.delete('Non Filterable')
     return ({ codeElementProperties, propertyPresentInAllNodes })
   }
 

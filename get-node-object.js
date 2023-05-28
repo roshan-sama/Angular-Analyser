@@ -14,25 +14,37 @@ let initializer = ''
 let serviceDecorator;
 let issuesList = []
 
+const baseNodeObject = {
+    Name: '',
+    Type: '',
+    'File Path': '',
+    'Non Filterable': {}
+}
+Object.freeze(baseNodeObject)
+
 const syntaxKindToNodeObjectMap = {
     [tsMorph.SyntaxKind.SourceFile]: (node) => {
+
+        const returnObject = { ...baseNodeObject }
+        returnObject.Name = node.getBaseName()
+        returnObject.Type = 'Source File'
+        returnObject['File Path'] = node.getFilePath()
+
         return {
-            nodeObject: {
-                Name: node.getBaseName(),
-                Type: 'Source File',
-                "File Path": node.getFilePath()
-            },
+            nodeObject: returnObject,
             id: getNodeId(node.getSourceFile(), node.getBaseName())
         }
     },
     [tsMorph.SyntaxKind.FunctionDeclaration]: (node) => {
         nodeName = `${node.getName()} (Function)`
+        const returnObject = { ...baseNodeObject }
+
+        returnObject.Name = nodeName
+        returnObject.Type = 'Function'
+        returnObject['File Path'] = node.getSourceFile().getFilePath()
+
         return {
-            nodeObject: {
-                Name: nodeName,
-                Type: 'Function',
-                'File Path': node.getSourceFile().getFilePath()
-            },
+            nodeObject: returnObject,
             id: getNodeId(node.getSourceFile(), nodeName)
         }
     },
@@ -43,6 +55,8 @@ const syntaxKindToNodeObjectMap = {
      */
     [tsMorph.SyntaxKind.ClassDeclaration]: (node) => {
         issuesList = {}
+        let nonFilterableObject = undefined
+
         //TODO: Enable users to select decorators to obtain in main file
         // Would be a useful feature
         classKind = undefined
@@ -57,11 +71,22 @@ const syntaxKindToNodeObjectMap = {
             serviceDecorator = node.getDecorators().find((decorator) => decorator.getName() === 'Component')
 
             const properties = serviceDecorator.getArguments()[0].getProperties()
+
             if (properties.length) {
                 const providerProperty = properties.find((property) => property.getStructure().name === 'providers')
-                if(providerProperty){
+
+                if (providerProperty) {
                     issuesList['Service DI Warning'] = node.getName() + ": Review Angular Service Injector for injected services"
                 }
+
+                // Get the property called selector from properties:
+                const selectorProperty = properties.find((property) => property.getStructure().name === 'selector')
+
+                if (nonFilterableObject === undefined) {
+                    nonFilterableObject = {}
+                }
+
+                nonFilterableObject.selectorProperty = selectorProperty?.getStructure().initializer.replaceAll("'", "")
             }
 
             // if (structure.providers !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
@@ -97,13 +122,20 @@ const syntaxKindToNodeObjectMap = {
         // highest Syntax kind that is one level below the source file that references
         // the Identifier
         nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
+
+        const returnObject = { ...baseNodeObject }
+
+        returnObject.Name = nodeName
+        returnObject.Type = nodeType
+        returnObject['File Path'] = node.getSourceFile().getFilePath()
+        returnObject['Non Filterable'] = issuesList
+
+        if (nonFilterableObject !== undefined) {
+            returnObject['Non Filterable'] = nonFilterableObject
+        }
+
         const finalNode = {
-            nodeObject: {
-                Name: nodeName,
-                Type: nodeType,
-                'File Path': node.getSourceFile().getFilePath(),
-                ...issuesList
-            },
+            nodeObject: returnObject,
             id: getNodeId(node.getSourceFile(), nodeName)
         }
         return finalNode
@@ -124,12 +156,14 @@ const syntaxKindToNodeObjectMap = {
             nodeName = `${node.getName()} (${declarationType})`
             nodeType = getNodeTypeFromDeclarationType(declarationType)
         }
+
+        const returnObject = { ...baseNodeObject }
+
+        returnObject.Name = nodeName
+        returnObject.Type = nodeType
+        returnObject['File Path'] = node.getSourceFile().getFilePath()
         return {
-            nodeObject: {
-                Name: nodeName,
-                Type: nodeType,
-                'File Path': node.getSourceFile().getFilePath()
-            },
+            nodeObject: returnObject,
             id: getNodeId(node.getSourceFile(), nodeName)
         }
     },

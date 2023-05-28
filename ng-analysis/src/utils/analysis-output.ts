@@ -6,140 +6,178 @@ export const analysisOutput: falcorDependencyGraph =
     "0: force-graph - ForceGraph (Function)": {
       "Name": "ForceGraph (Function)",
       "Type": "Function",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/utils/force-graph.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/utils/force-graph.ts",
+      "Non Filterable": {}
     },
     "1: analysis-output - analysisOutput (const)": {
       "Name": "analysisOutput (const)",
       "Type": "Const",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/utils/analysis-output.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/utils/analysis-output.ts",
+      "Non Filterable": {}
     },
     "2: non-root-service-example - NonRootServiceExample (Service)": {
       "Name": "NonRootServiceExample (Service)",
       "Type": "Angular Service",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/non-root-service-example.ts",
-      "Service DI Error": "NonRootServiceExample: Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
+      "Non Filterable": {
+        "Service DI Error": "NonRootServiceExample: Angular Service Injector is not provided in root. (https://angular.io/guide/architecture-services#providing-services)"
+      }
     },
     "3: invalid-injectable-service - InvalidInjectableService (Service)": {
       "Name": "InvalidInjectableService (Service)",
       "Type": "Angular Service",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/invalid-injectable-service.ts",
-      "Service DI Error": "InvalidInjectableService: Angular Service Injector is not provided in root: @Injectable({\n  providedIn: 'any'\n})"
+      "Non Filterable": {
+        "Service DI Error": "InvalidInjectableService: Angular Service Injector is not provided in root: @Injectable({\n  providedIn: 'any'\n})"
+      }
     },
     "4: hero.service - HeroService (Service)": {
       "Name": "HeroService (Service)",
       "Type": "Angular Service",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.ts",
+      "Non Filterable": {}
     },
     "5: app.module - AppModule (Module)": {
       "Name": "AppModule (Module)",
       "Type": "Angular Module",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts",
+      "Non Filterable": {}
     },
     "6: app.component - AppComponent (Component)": {
       "Name": "AppComponent (Component)",
       "Type": "Angular Component",
       "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
-      "Service DI Warning": "AppComponent: Review Angular Service Injector for injected services"
+      "Non Filterable": {
+        "selectorProperty": "app-root"
+      }
     },
     "6: app.component - valueitem (Arrow Function - const)": {
       "Name": "valueitem (Arrow Function - const)",
       "Type": "Arrow Function",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
+      "Non Filterable": {}
     },
     "6: app.component - testVariable1 (var)": {
       "Name": "testVariable1 (var)",
       "Type": "Var variable",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
+      "Non Filterable": {}
     },
     "6: app.component - referencerLetVariable (let)": {
       "Name": "referencerLetVariable (let)",
       "Type": "Let variable",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
+      "Non Filterable": {}
     },
     "7: app-routing.module - AppRoutingModule (Module)": {
       "Name": "AppRoutingModule (Module)",
       "Type": "Angular Module",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts",
+      "Non Filterable": {}
     },
     "7: app-routing.module - routes (const)": {
       "Name": "routes (const)",
       "Type": "Const",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app-routing.module.ts",
+      "Non Filterable": {}
     },
     "8: rjm-test-component.component - RjmTestComponentComponent (Component)": {
       "Name": "RjmTestComponentComponent (Component)",
       "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.ts",
+      "Non Filterable": {
+        "selectorProperty": "app-rjm-test-component"
+      }
     },
     "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)": {
       "Name": "NodeFilterPresentationComponent (Component)",
       "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.ts",
+      "Non Filterable": {
+        "selectorProperty": "node-filter-presentation"
+      }
     },
     "10: link-filter-presentation.component - LinkFilterPresentationComponent (Component)": {
       "Name": "LinkFilterPresentationComponent (Component)",
       "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.ts",
+      "Non Filterable": {
+        "selectorProperty": "link-filter-presentation"
+      }
     },
     "11: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)": {
       "Name": "GraphDisplaySmartComponentComponent (Component)",
       "Type": "Angular Component",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.ts",
+      "Non Filterable": {
+        "selectorProperty": "app-graph-display-smart-component"
+      }
     },
     "6: app.component - app.component.ts": {
       "Name": "app.component.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.ts",
+      "Non Filterable": {}
     },
     "9: node-filter-presentation.component - node-filter-presentation.component.ts": {
       "Name": "node-filter-presentation.component.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.ts",
+      "Non Filterable": {}
     },
     "10: link-filter-presentation.component - link-filter-presentation.component.ts": {
       "Name": "link-filter-presentation.component.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.ts",
+      "Non Filterable": {}
     },
     "12: hero.service.spec - hero.service.spec.ts": {
       "Name": "hero.service.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/services/hero.service.spec.ts",
+      "Non Filterable": {}
     },
     "13: main - main.ts": {
       "Name": "main.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/main.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/main.ts",
+      "Non Filterable": {}
     },
     "5: app.module - app.module.ts": {
       "Name": "app.module.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.module.ts",
+      "Non Filterable": {}
     },
     "14: app.component.spec - app.component.spec.ts": {
       "Name": "app.component.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/app.component.spec.ts",
+      "Non Filterable": {}
     },
     "15: rjm-test-component.component.spec - rjm-test-component.component.spec.ts": {
       "Name": "rjm-test-component.component.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/rjm-test-component/rjm-test-component.component.spec.ts",
+      "Non Filterable": {}
     },
     "16: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts": {
       "Name": "node-filter-presentation.component.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/node-filter-presentation/node-filter-presentation.component.spec.ts",
+      "Non Filterable": {}
     },
     "17: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts": {
       "Name": "link-filter-presentation.component.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/link-filter-presentation/link-filter-presentation.component.spec.ts",
+      "Non Filterable": {}
     },
     "18: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts": {
       "Name": "graph-display-smart-component.component.spec.ts",
       "Type": "Source File",
-      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.spec.ts"
+      "File Path": "/workspaces/Angular-Analyser/ng-analysis/src/app/components/graph-display-smart-component/graph-display-smart-component.component.spec.ts",
+      "Non Filterable": {}
     }
   },
   "nodes": [

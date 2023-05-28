@@ -101,7 +101,7 @@ export class NodeFilterPresentationComponent {
         propertyPresentInAllNodes.add(property)
       }
     })
-
+    console.log(codeElementProperties, "codeElementProperties")
     codeElementProperties.delete('Non Filterable')
     propertyPresentInAllNodes.delete('Non Filterable')
     return ({ codeElementProperties, propertyPresentInAllNodes })

@@ -26,6 +26,7 @@ export class AppComponent {
   filterPropertiesTotalValuesMap: { [key in string]: number } = {}
 
   defaultFilterValues?: IAnalysisFilter
+  nodeDetails?: falcorDependencyGraph["nodesById"][0]
 
   ngOnInit() {
     this.analysisOutput = analysisOutput
@@ -35,6 +36,10 @@ export class AppComponent {
     this.drawGraph(analysisOutput)
   }
 
+  onNodeSelect = (nodeId: string) => {
+    this.nodeDetails = analysisOutput.nodesById[nodeId]
+  }
+  
   chart = {
     nodeId: (d: any) => d.value[1],
     nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]]['Type'],
@@ -43,10 +48,11 @@ export class AppComponent {
     linkStrokeWidth: (l: any) => Math.sqrt(l.value),
     linkSource: ({ source }: falcorDependencyGraph["links"][0]) => source.value[1],
     linkTarget: ({ target }: falcorDependencyGraph["links"][0]) => target.value[1],
-    width: 1000,
-    height: 600,
+    width: 1280,
+    height: 640,
     //@ts-ignore
-    invalidation: null // a promise to stop the simulation when the cell is re-run
+    invalidation: null, // a promise to stop the simulation when the cell is re-run
+    onClick: this.onNodeSelect
   }
 
   handleFilterChange(filterValues: IAnalysisFilter) {

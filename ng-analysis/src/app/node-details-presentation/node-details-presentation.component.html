@@ -1,0 +1,15 @@
+<mat-card class="p-2 h-100">
+    <ng-container *ngIf="nodeDetails">
+        <!-- List of falcorgraph node keys to display -->
+        Name: {{nodeDetails?nodeDetails["Name"] : ""}}<br>
+        Type: {{nodeDetails?nodeDetails["Type"] : ""}}<br>
+        
+        <ng-container *ngIf="nodeDetails['Type'] === 'Angular Component'">
+            Selector: {{nodeDetails?nodeDetails["Non Filterable"]["selectorProperty"] : ""}}<br>
+            HTML Template path: {{nodeDetails?nodeDetails["Non Filterable"]["filePathToTemplate"] : ""}}<br>
+        </ng-container>
+        <hr />
+        File: {{nodeDetails?nodeDetails["File Path"] : ""}}<br>
+    </ng-container>
+    <p *ngIf="!nodeDetails">Select Node to view details</p>
+</mat-card>

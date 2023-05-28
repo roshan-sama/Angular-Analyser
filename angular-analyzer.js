@@ -66,7 +66,7 @@ nodesByIdMap.forEach((node, id) => {
 })
 
 // Analyze links between Nodes
-createLinksForNodes(rawNodesByIdMap, nodesByIdMap)
+createReferenceLinksForNodes(rawNodesByIdMap, nodesByIdMap)
 
 
 /**
@@ -91,7 +91,7 @@ function analyzeFileForNodes(analysisSourceFile, getNodeElements) {
  * @param {typedefs.RawNodesByIdMap} rawNodesByIdMap
  * @returns {undefined}
  */
-function createLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
+function createReferenceLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
     rawNodesByIdMap.forEach((node, id) => {
         for (reference of node.findReferencesAsNodes()) {
 

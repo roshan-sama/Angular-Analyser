@@ -14,6 +14,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { GraphDisplaySmartComponentComponent } from './components/graph-display-smart-component/graph-display-smart-component.component';
 import {MatButtonModule} from '@angular/material/button';
 import { LinkFilterPresentationComponent } from './link-filter-presentation/link-filter-presentation.component';
+import { NodeDetailsPresentationComponent } from './node-details-presentation/node-details-presentation.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { LinkFilterPresentationComponent } from './link-filter-presentation/link
     RjmTestComponentComponent,
     NodeFilterPresentationComponent,
     GraphDisplaySmartComponentComponent,
-    LinkFilterPresentationComponent
+    LinkFilterPresentationComponent,
+    NodeDetailsPresentationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { LinkFilterPresentationComponent } from './link-filter-presentation/link
     MatCheckboxModule,
     MatCardModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

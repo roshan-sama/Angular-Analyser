@@ -81,12 +81,16 @@ const syntaxKindToNodeObjectMap = {
 
                 // Get the property called selector from properties:
                 const selectorProperty = properties.find((property) => property.getStructure().name === 'selector')
-
+                const templateUrlProperty = properties.find((property) => property.getStructure().name === 'templateUrl')
+                const templateProperty = properties.find((property) => property.getStructure().name === 'template')
+                const filePathToTemplate = templateUrlProperty ?? templateProperty
+                
                 if (nonFilterableObject === undefined) {
                     nonFilterableObject = {}
                 }
 
                 nonFilterableObject.selectorProperty = selectorProperty?.getStructure().initializer.replaceAll("'", "")
+                nonFilterableObject.filePathToTemplate = filePathToTemplate?.getStructure().initializer.replaceAll("'", "")
             }
 
             // if (structure.providers !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
@@ -128,14 +132,13 @@ const syntaxKindToNodeObjectMap = {
         returnObject.Name = nodeName
         returnObject.Type = nodeType
         returnObject['File Path'] = node.getSourceFile().getFilePath()
-        returnObject['Non Filterable'] = issuesList
 
         if (nonFilterableObject !== undefined) {
             returnObject['Non Filterable'] = nonFilterableObject
         }
 
         const finalNode = {
-            nodeObject: returnObject,
+            nodeObject: {...returnObject, ...issuesList},
             id: getNodeId(node.getSourceFile(), nodeName)
         }
         return finalNode

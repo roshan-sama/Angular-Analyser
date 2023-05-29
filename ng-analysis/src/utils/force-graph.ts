@@ -30,7 +30,7 @@ export function ForceGraph({
   width = 640, // outer width, in pixels
   height = 400, // outer height, in pixels
   invalidation, // when this promise resolves, stop the simulation
-  onClick=()=>{}, // function to call when a node is clicked
+  onClick = () => { }, // function to call when a node is clicked
 } = {}) {
   // Compute values.
   const N = d3.map(nodes, nodeId).map(intern);
@@ -68,7 +68,6 @@ export function ForceGraph({
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [-width / 2, -height / 2, width, height])
-    .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
   // Define arrow marker within SVG
   svg.append("defs").append("marker")
@@ -106,50 +105,70 @@ export function ForceGraph({
     .call(drag(simulation));
 
   // Define zoom behavior
-  // const zoom = d3.zoom()
-  //   .scaleExtent([0.1, 10])  // This control how much you can zoom in and out
-  //   .on("zoom", function (event) {
-  //     svg.attr("transform", event.transform);
-  //   });
+  const zoom = d3.zoom()
+    .scaleExtent([0.1, 10])  // This control how much you can zoom in and out
+    .on("zoom", function (event) {
+      svg.attr("transform", event.transform);
+    });
 
   // svg.call(zoom);
-  
+
   // Set initial zoom transform
   let transform = d3.zoomIdentity;
 
   // Zoom in
   d3.select('#zoom_in').on('click', function () {
+    console.log("zoom in");
     transform = transform.scale(1.1);
     svg.transition().duration(750).call(zoom.transform, transform);
   });
+
+  const maxHeight = 3000
+  const maxWidth = 6000
 
   // Zoom out
   d3.select('#zoom_out').on('click', function () {
     transform = transform.scale(1 / 1.1);
     svg.transition().duration(750).call(zoom.transform, transform);
+    if (transform.k < 1) {
+      console.log("increasing width and height")
+      let newHeight = height / transform.k
+      let newWidth = width / transform.k
+
+      newHeight = newHeight > maxHeight ? maxHeight : newHeight
+      newWidth = newWidth > maxWidth ? maxWidth : newWidth
+
+      svg.attr("width", newWidth)
+        .attr("height", newHeight)
+        .attr("viewBox", [-newWidth / 2, -newHeight / 2, newWidth, newHeight])
+
+      transform = transform.translate(-50 / transform.k, 0);
+      transform = transform.translate(0, -50 / transform.k);
+      svg.transition().duration(750).call(zoom.transform, transform);
+    }
   });
 
   // Pan left
   d3.select('#pan_left').on('click', function () {
-    transform = transform.translate(-50, 0);
+    transform = transform.translate(-50 / transform.k, 0);
     svg.transition().duration(750).call(zoom.transform, transform);
   });
 
   // Pan right
   d3.select('#pan_right').on('click', function () {
-    transform = transform.translate(50, 0);
+    transform = transform.translate(50 / transform.k, 0);
     svg.transition().duration(750).call(zoom.transform, transform);
   });
 
   // Pan up
-  d3.select('#pan_up').on('click', function () {  
-    transform = transform.translate(0, -50);
+  d3.select('#pan_up').on('click', function () {
+    transform = transform.translate(0, -50 / transform.k);
     svg.transition().duration(750).call(zoom.transform, transform);
   });
 
   // Pan down
-  d3.select('#pan_down').on('click', function () {  
-    transform = transform.translate(0, 50);
+  d3.select('#pan_down').on('click', function () {
+    transform = transform.translate(0, 50 / transform.k);
     svg.transition().duration(750).call(zoom.transform, transform);
   });
   if (W) link.attr("stroke-width", ({ index: i }) => W[i]);

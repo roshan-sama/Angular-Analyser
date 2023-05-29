@@ -53,15 +53,19 @@
         [nodeDetails]="nodeDetails"></node-details-presentation>
     </div>
   </div>
-  <div class="border overflow-hidden" style="min-width: 1280px; min-height: 640;">
-    <div id="chart-div" style="width: 1280px; height: 640;"></div>
+  <div class="border" style="max-width: 1280px; max-height: 640;">
+    <div id="chart-div" class="overflow-hidden" style="max-width: 1280px; max-height: 640px;"></div>
     <div class="d-flex">
-      <button mat-raised-button id="zoom_in">+</button>
-      <button mat-raised-button id="zoom_out">-</button>
-      <button mat-raised-button id="pan_left" class="ms-auto">&#x003c;-</button>
-      <button mat-raised-button id="pan_right">-&gt;</button>
-      <button mat-raised-button id="pan_up">^</button>
-      <button mat-raised-button id="pan_down">v</button>
+      <div>
+        <button mat-raised-button id="zoom_in">+</button>
+        <button mat-raised-button id="zoom_out">-</button>
+      </div>
+      <div class="ms-auto">
+        <button mat-raised-button id="pan_left">&#x003c;-</button>
+        <button mat-raised-button id="pan_right">-&gt;</button>
+        <button mat-raised-button id="pan_up">^</button>
+        <button mat-raised-button id="pan_down">v</button>
+      </div>
     </div>
   </div>
   <router-outlet></router-outlet>

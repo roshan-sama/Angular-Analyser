@@ -39,21 +39,24 @@ export class LinkFilterPresentationComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['analysisGraph']?.currentValue) {
-      const { codeElementProperties, propertyPresentInAllNodes } = this.getFilterableKeys(changes['analysisGraph']?.currentValue)
-      this.filterableKeys = Array.from(codeElementProperties)
-      const nodesObject: falcorDependencyGraph["nodesById"] = changes['analysisGraph']?.currentValue.nodesById
+    if (changes['analysisGraph']?.currentValue !== undefined) {
+      const { linkElementProperties, propertyPresentInAllNodes } = this.getFilterableKeys(changes['analysisGraph']!.currentValue)
+      this.filterableKeys = Array.from(linkElementProperties)
+      const links: falcorDependencyGraph["links"] = changes['analysisGraph']?.currentValue.links
 
       this.filterableKeys.forEach((key) => {
         const valuesList: string[] = []
         const valuesSet: { [key in string]: boolean } = {}
 
-        Object.values(nodesObject).forEach((node) => {
-          if (valuesSet[node[key]]) {
+        links.forEach((link) => {
+          //@ts-ignore
+          if (valuesSet[link[key]]) {
             return
-          } else if (node[key] !== undefined) {
-            valuesSet[node[key]] = propertyPresentInAllNodes.has(key) ? true : false
-            valuesList.push(node[key])
+          } else if (link[key] !== undefined) {
+            //@ts-ignore
+            valuesSet[link[key]] = propertyPresentInAllNodes.has(key) ? true : false
+            //@ts-ignore
+            valuesList.push(link[key])
           }
         })
         this.filterableValues[key] = valuesList
@@ -69,41 +72,45 @@ export class LinkFilterPresentationComponent {
   }
 
   getFilterableKeys(graph: falcorDependencyGraph) {
-    const codeElements = Object.values(graph.nodesById)
+    const linkElements = graph.links
 
-    const codeElementProperties = new Set<string>()
+    const linkElementProperties = new Set<string>()
     const propertyNameToCountMap = new Map<string, number>();
     const propertyPresentInAllNodes = new Set<string>()
 
-    if (!(codeElements.length > 0)) {
+    if (!(linkElements.length > 0)) {
       console.error('Output graph has no links in nodesById key')
-      return ({ codeElementProperties, propertyPresentInAllNodes })
+      return ({ linkElementProperties, propertyPresentInAllNodes })
     }
 
     // Loop over every link, and for each node, check every property
     // it contains, and add it to the unique Set of code element properties
-    codeElements.forEach((codeElement) => {
-      Object.keys(codeElement).forEach((codeElementProperty) => {
+    linkElements.forEach((linkElement) => {
+      Object.keys(linkElement).forEach((linkElementProperty) => {
 
-        codeElementProperties.add(codeElementProperty)
+        if(linkElementProperty === 'source' || linkElementProperty === 'target') {
+          return
+        }
 
-        if (propertyNameToCountMap.has(codeElementProperty)) {
-          const previousCount = propertyNameToCountMap.get(codeElementProperty)!
-          propertyNameToCountMap.set(codeElementProperty, previousCount + 1)
+        linkElementProperties.add(linkElementProperty)
+
+        if (propertyNameToCountMap.has(linkElementProperty)) {
+          const previousCount = propertyNameToCountMap.get(linkElementProperty)!
+          propertyNameToCountMap.set(linkElementProperty, previousCount + 1)
         } else {
-          propertyNameToCountMap.set(codeElementProperty, 1)
+          propertyNameToCountMap.set(linkElementProperty, 1)
         }
 
       })
     })
 
     propertyNameToCountMap.forEach((count, property) => {
-      if (count === codeElements.length) {
+      if (count === linkElements.length) {
         propertyPresentInAllNodes.add(property)
       }
     })
 
-    return ({ codeElementProperties, propertyPresentInAllNodes })
+    return ({ linkElementProperties, propertyPresentInAllNodes })
   }
 
   handleTypeSelect(key: string, value: string, checked: boolean) {

@@ -1,1 +1,28 @@
-<p>link-filter-presentation works!</p>
+<mat-card class="p-2">
+    <p>Select Link Elements to Display</p>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let filterableKey of filterableKeys">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{filterableKey}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <div class="d-flex justify-content-end w-100 align-items-center">
+                        <div class="me-2">Filters active: {{filterPropertiesToEnabledCountMap[filterableKey]}} /
+                            {{filterPropertiesTotalValuesMap[filterableKey]}}</div>
+                        <button mat-raised-button color="primary" class="me-2"
+                            (click)="handleCheckAll(filterableKey, $event)">Check All</button>
+                        <button mat-raised-button color="accent" (click)="handleUncheckAll(filterableKey, $event)">Uncheck
+                            All</button>
+                    </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class=" d-flex flex-wrap border rounded" style="max-height: 50vh; overflow: auto; resize: vertical;">
+                <mat-checkbox class="my-1" *ngFor="let value of filterableValues[filterableKey]"
+                    (change)="handleTypeSelect(filterableKey, value, $event.checked)"
+                    [checked]="filteredObject[filterableKey][value]">{{value}}
+                </mat-checkbox>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-card>

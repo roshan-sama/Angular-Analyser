@@ -410,6 +410,1196 @@ export const analysisOutput: falcorDependencyGraph =
         "$type": "ref",
         "value": [
           "nodesById",
+          "0: force-graph - ForceGraph (Function)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - app.component.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "0: force-graph - ForceGraph (Function)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - app.component.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - node-filter-presentation.component.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "1: analysis-output - analysisOutput (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - link-filter-presentation.component.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - app.component.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "13: hero.service.spec - hero.service.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "13: hero.service.spec - hero.service.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "13: hero.service.spec - hero.service.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "14: main - main.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "14: main - main.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "15: app.component.spec - app.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "15: app.component.spec - app.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "15: app.component.spec - app.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "15: app.component.spec - app.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "15: app.component.spec - app.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - testVariable1 (var)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - referencerLetVariable (let)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.module - AppRoutingModule (Module)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.module - AppRoutingModule (Module)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.module - routes (const)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "7: app-routing.module - AppRoutingModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "16: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "16: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "16: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "16: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "8: rjm-test-component.component - RjmTestComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "16: rjm-test-component.component.spec - rjm-test-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "17: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "17: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "17: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "17: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "9: node-filter-presentation.component - NodeFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "17: node-filter-presentation.component.spec - node-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "18: node-details-presentation.component.spec - node-details-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "18: node-details-presentation.component.spec - node-details-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "18: node-details-presentation.component.spec - node-details-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "18: node-details-presentation.component.spec - node-details-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "18: node-details-presentation.component.spec - node-details-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "19: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "19: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "19: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "19: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "19: link-filter-presentation.component.spec - link-filter-presentation.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - app.module.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "5: app.module - AppModule (Module)"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "20: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "20: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "20: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "20: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "12: graph-display-smart-component.component - GraphDisplaySmartComponentComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "20: graph-display-smart-component.component.spec - graph-display-smart-component.component.spec.ts"
+        ]
+      },
+      "Type": "Reference"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
           "6: app.component - AppComponent (Component)"
         ]
       },
@@ -435,6 +1625,23 @@ export const analysisOutput: falcorDependencyGraph =
         "value": [
           "nodesById",
           "10: node-details-presentation.component - NodeDetailsPresentationComponent (Component)"
+        ]
+      },
+      "Type": "Angular Template Selector"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "11: link-filter-presentation.component - LinkFilterPresentationComponent (Component)"
         ]
       },
       "Type": "Angular Template Selector"

@@ -22,8 +22,11 @@ export class AppComponent {
   analysisOutput?: falcorDependencyGraph
 
   filteredOutput?: falcorDependencyGraph
-  filterPropertiesToEnabledCountMap: { [key in string]: number } = {}
-  filterPropertiesTotalValuesMap: { [key in string]: number } = {}
+  filterNodePropertiesToEnabledCountMap: { [key in string]: number } = {}
+  filterNodePropertiesTotalValuesMap: { [key in string]: number } = {}
+
+  filterLinkPropertiesToEnabledCountMap: { [key in string]: number } = {}
+  filterLinkPropertiesTotalValuesMap: { [key in string]: number } = {}
 
   defaultFilterValues?: IAnalysisFilter
   nodeDetails?: falcorDependencyGraph["nodesById"][0]
@@ -39,7 +42,7 @@ export class AppComponent {
   onNodeSelect = (nodeId: string) => {
     this.nodeDetails = analysisOutput.nodesById[nodeId]
   }
-  
+
   chart = {
     nodeId: (d: any) => d.value[1],
     nodeGroup: (d: any) => analysisOutput.nodesById[d.value[1]]['Type'],
@@ -55,7 +58,7 @@ export class AppComponent {
     onClick: this.onNodeSelect
   }
 
-  handleFilterChange(filterValues: IAnalysisFilter) {
+  handleNodeFilterChange(filterValues: IAnalysisFilter) {
     this.filteredOutput = structuredClone(analysisOutput)
     const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
 
@@ -105,10 +108,69 @@ export class AppComponent {
       tempPropertiesToEnabledCountMap[key] = currentEnabledKeyTotal
       tempPropertiesToCountMap[key] = currentKeyTotal
     })
-    this.filterPropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
-    this.filterPropertiesTotalValuesMap = tempPropertiesToCountMap
+    this.filterNodePropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
+    this.filterNodePropertiesTotalValuesMap = tempPropertiesToCountMap
 
     console.debug("Final Node Ids post filter: ", nodeIds)
+    this.drawGraph(this.filteredOutput!)
+  }
+
+  handleLinkFilterChange(filterValues: IAnalysisFilter) {
+    this.filteredOutput = structuredClone(analysisOutput)
+    let links = [...this.filteredOutput!.links]
+
+    console.log(filterValues, "Filtering links using these values")
+
+    Object.keys(filterValues).forEach((key) => {
+
+      this.filteredOutput!.links.forEach((link) => {
+        Object.entries(filterValues[key]).forEach(([value, enabled]) => {
+          // Remove nodes from the list if their value matches the filter value and
+          // the filter value is not enabled for display
+          if (!enabled) {
+            console.log(link[key], value, enabled)
+            if (link[key] === value) {
+              //@ts-ignore
+              links = links.filter((l) => l[key] !== value)
+              console.log(links.length, "l after filter")
+            }
+          }
+          // If the current key is enabled, but the value for the key in the node is undefined, 
+          // remove the node
+          if (enabled) {
+            if (link[key] === undefined) {
+              //@ts-ignore
+              links = links.filter((l) => l[key]!== value)
+            }
+          }
+        })
+      })
+    })
+
+    // TODO: Hardcoding id as second element here, ensure no side effects
+    // this.filteredOutput!.nodes = this.analysisOutput!.nodes.filter((node) => nodeIds.has(node.value[1]))
+    this.filteredOutput!.links = links
+
+    const tempPropertiesToEnabledCountMap: { [key in string]: number } = {} = {}
+    const tempPropertiesToCountMap: { [key in string]: number } = {} = {}
+    Object.keys(filterValues).forEach((key) => {
+      let currentEnabledKeyTotal = 0
+      let currentKeyTotal = 0
+
+      Object.keys(filterValues[key]).forEach((value) => {
+        if (filterValues[key][value]) {
+          currentEnabledKeyTotal++
+        }
+        currentKeyTotal++
+      })
+
+      tempPropertiesToEnabledCountMap[key] = currentEnabledKeyTotal
+      tempPropertiesToCountMap[key] = currentKeyTotal
+    })
+    this.filterLinkPropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
+    this.filterLinkPropertiesTotalValuesMap = tempPropertiesToCountMap
+
+    console.debug("Final Links post filter: ", links)
     this.drawGraph(this.filteredOutput!)
   }
 

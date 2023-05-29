@@ -41,12 +41,18 @@
 
         <mat-tab label="Node Filters">
           <node-filter-presentation [analysisGraph]="analysisOutput"
-            [filterPropertiesToEnabledCountMap]="filterPropertiesToEnabledCountMap"
-            [filterPropertiesTotalValuesMap]="filterPropertiesTotalValuesMap"
-            (filterChangeEvent)="handleFilterChange($event)">
+            [filterPropertiesToEnabledCountMap]="filterNodePropertiesToEnabledCountMap"
+            [filterPropertiesTotalValuesMap]="filterNodePropertiesTotalValuesMap"
+            (filterChangeEvent)="handleNodeFilterChange($event)">
           </node-filter-presentation>
         </mat-tab>
-        <mat-tab label="Link Filters"> In progress</mat-tab>
+        <mat-tab label="Link Filters">
+          <link-filter-presentation [analysisGraph]="analysisOutput"
+            [filterPropertiesToEnabledCountMap]="filterLinkPropertiesToEnabledCountMap"
+            [filterPropertiesTotalValuesMap]="filterLinkPropertiesTotalValuesMap"
+            (filterChangeEvent)="handleLinkFilterChange($event)">
+          </link-filter-presentation>
+        </mat-tab>
       </mat-tab-group>
 
       <node-details-presentation class="d-block col-12 col-md-6"

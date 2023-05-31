@@ -79,6 +79,8 @@ nodesByIdMap.forEach((node, id) => {
 })
 
 createAngularComponentLinksForNodes(rawNodesByIdMap, angularComponentNodesByIdMap)
+createAngularDILinksForNodes(rawNodesByIdMap, angularComponentNodesByIdMap)
+
 
 /**
  * Analyze a file for a type of Code element such as Class, Function etc.
@@ -145,13 +147,13 @@ function createReferenceLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
 
 /**
  * Analyze nodes for links between them
- * @param {typedefs.NodesByIdMap} nodesByIdMap - The call expression to get the function identifier from.
+ * @param {typedefs.NodesByIdMap} ngComponentByIdMap - The map of Angular Nodes to analyze.
  * @param {typedefs.RawNodesByIdMap} rawNodesByIdMap
  * @returns {undefined}
  */
-function createAngularComponentLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
+function createAngularComponentLinksForNodes(rawNodesByIdMap, ngComponentByIdMap) {
 
-    nodesByIdMap.forEach((sourceNode, sourceId) => {
+    ngComponentByIdMap.forEach((sourceNode, sourceId) => {
         const templatePath = sourceNode["Non Filterable"]["filePathToTemplate"]
         const nodeSourceFilePath = sourceNode["File Path"]
 
@@ -164,14 +166,14 @@ function createAngularComponentLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
             nodeText = fs.readFileSync(absoluteTemplatePath, 'utf8')
         }
 
-        nodesByIdMap.forEach((targetNode, targetId) => {
+        ngComponentByIdMap.forEach((targetNode, targetId) => {
             const elementSelector = targetNode["Non Filterable"]["selectorProperty"]
             const regexString = `<${elementSelector}(.*)?</${elementSelector}>`
             const regex = new RegExp(regexString, 'ms')
 
             const match = nodeText.match(regex)
 
-            if(match){
+            if (match) {
                 console.log("New Angular Template Selector Link", sourceId + " -> " + targetId)
                 dependencyGraph.links.push({
                     source: {
@@ -193,8 +195,53 @@ function createAngularComponentLinksForNodes(rawNodesByIdMap, nodesByIdMap) {
             }
         })
 
-})
+    })
+}
 
+/**
+ * Analyze nodes for links between them
+ * @param {typedefs.NodesByIdMap} ngComponentByIdMap - The map of Angular Nodes to analyze.
+ * @param {typedefs.RawNodesByIdMap} rawNodesByIdMap
+ * @returns {undefined}
+ */
+function createAngularDILinksForNodes(rawNodesByIdMap, ngComponentByIdMap) {
+    ngComponentByIdMap.forEach((sourceNode, sourceId) => {
+        const componentClass = rawNodesByIdMap.get(sourceId)
+        const constructor = componentClass.getConstructors()[0]
+        const constructorParameters = constructor?.getParameters() ?? []
+
+        constructorParameters.forEach((constructorParameter) => {
+            const typeReference = constructorParameter.getDescendantsOfKind(tsMorph.SyntaxKind.TypeReference)?.[0]
+
+            const symbol = typeReference?.getType()?.getSymbol();
+            if (symbol) {
+                const declarations = symbol.getDeclarations();
+                const classDeclaration = declarations.find(declaration => tsMorph.Node.isClassDeclaration(declaration));
+                if (classDeclaration) {
+                    const object = getNodeObject(classDeclaration)
+                    if (object.nodeObject.Type === 'Angular Service') {
+                        dependencyGraph.links.push({
+                            source: {
+                                $type: "ref",
+                                "value": [
+                                    "nodesById",
+                                    sourceId
+                                ],
+                            },
+                            target: {
+                                $type: "ref",
+                                "value": [
+                                    "nodesById",
+                                    object.id
+                                ],
+                            },
+                            Type: 'Dependency Injected Service'
+                        })
+                    }
+                }
+            }
+        })
+    })
 }
 
 const fileOutput = `import { falcorDependencyGraph } from "src/app/interfaces/falcor-dependency-graph";

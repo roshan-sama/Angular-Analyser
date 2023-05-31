@@ -1645,6 +1645,23 @@ export const analysisOutput: falcorDependencyGraph =
         ]
       },
       "Type": "Angular Template Selector"
+    },
+    {
+      "source": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "6: app.component - AppComponent (Component)"
+        ]
+      },
+      "target": {
+        "$type": "ref",
+        "value": [
+          "nodesById",
+          "4: hero.service - HeroService (Service)"
+        ]
+      },
+      "Type": "Dependency Injected Service"
     }
   ]
 }

@@ -13,6 +13,8 @@ const project = new tsMorph.Project({
 const pattern = "ng-analysis/**/*.ts";
 const typescriptFiles = glob.globSync(pattern, { ignore: ["ng-analysis/node_modules/**"] });
 
+const errors = []
+
 let analysisSourceFile
 let analysisNode
 let reference
@@ -159,11 +161,17 @@ function createAngularComponentLinksForNodes(rawNodesByIdMap, ngComponentByIdMap
 
         let nodeText = ""
         if (templatePath === nodeSourceFilePath) {
-            nodeText = rawNodesByIdMap[sourceId].getText()
+            //TODO: Get template from decorator and search that as node text
+            //nodeText = rawNodesByIdMap[sourceId].getText()
         }
         else {
             const absoluteTemplatePath = path.resolve(path.dirname(nodeSourceFilePath), templatePath)
+            try{
             nodeText = fs.readFileSync(absoluteTemplatePath, 'utf8')
+            }catch(ex){
+                errors.push(`During Link analysis of ${sourceId} Unable to read file: `, absoluteTemplatePath)
+                console.error('Unable to read file: ', absoluteTemplatePath)
+            }
         }
 
         ngComponentByIdMap.forEach((targetNode, targetId) => {
@@ -249,4 +257,6 @@ const fileOutput = `import { falcorDependencyGraph } from "src/app/interfaces/fa
 export const analysisOutput: falcorDependencyGraph =
 ` + JSON.stringify(dependencyGraph, null, 2)
 fs.writeFileSync("ng-analysis/src/utils/analysis-output.ts", fileOutput)
+
+errors.length > 0 && console.log("Errors occurred during analysis: ", errors)
 

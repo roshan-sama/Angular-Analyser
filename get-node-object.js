@@ -81,16 +81,26 @@ const syntaxKindToNodeObjectMap = {
 
                 // Get the property called selector from properties:
                 const selectorProperty = properties.find((property) => property.getStructure().name === 'selector')
+                let filePathToTemplate = undefined
+
                 const templateUrlProperty = properties.find((property) => property.getStructure().name === 'templateUrl')
-                const templateProperty = properties.find((property) => property.getStructure().name === 'template')
-                const filePathToTemplate = templateUrlProperty ?? templateProperty
-                
+                if (templateUrlProperty) {
+                    filePathToTemplate =templateUrlProperty.getDescendantsOfKind(tsMorph.SyntaxKind.StringLiteral)[0]?.getLiteralValue()
+                } else {
+                    const templateProperty = properties.find((property) => property.getStructure().name === 'template')
+                    if (templateProperty) {
+                        filePathToTemplate =  node.getSourceFile().getBaseName()
+                    }
+                }
+
                 if (nonFilterableObject === undefined) {
                     nonFilterableObject = {}
                 }
 
-                nonFilterableObject.selectorProperty = selectorProperty?.getStructure().initializer.replaceAll("'", "")
-                nonFilterableObject.filePathToTemplate = filePathToTemplate?.getStructure().initializer.replaceAll("'", "")
+                nonFilterableObject.selectorProperty = selectorProperty?.getDescendantsOfKind(tsMorph.SyntaxKind.StringLiteral)[0]?.getLiteralValue()
+                if (filePathToTemplate) {
+                    nonFilterableObject.filePathToTemplate = filePathToTemplate
+                }
             }
 
             // if (structure.providers !== 'providedIn' || structure.initializer.replaceAll("'", "") !== 'root') {
@@ -138,7 +148,7 @@ const syntaxKindToNodeObjectMap = {
         }
 
         const finalNode = {
-            nodeObject: {...returnObject, ...issuesList},
+            nodeObject: { ...returnObject, ...issuesList },
             id: getNodeId(node.getSourceFile(), nodeName)
         }
         return finalNode

@@ -7,7 +7,7 @@ import { IAnalysisFilter } from './interfaces/analysis-filter';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: "./app.component.html",
   styleUrls: ['./app.component.scss'],
   providers: [HeroService]
 })
@@ -16,27 +16,36 @@ export class AppComponent {
   title = 'ng-analysis';
 
   constructor(private hero: HeroService) {
-    let filterValues: IAnalysisFilter = {}
+    this.analysisOutput = analysisOutput
   }
 
-  analysisOutput?: falcorDependencyGraph
+  analysisOutput: falcorDependencyGraph
 
   filteredOutput?: falcorDependencyGraph
   filterNodePropertiesToEnabledCountMap: { [key in string]: number } = {}
   filterNodePropertiesTotalValuesMap: { [key in string]: number } = {}
 
+  filteredNodeObject: IAnalysisFilter = {}
+  propertyPresentInAllNodes: Set<string> = new Set()
+  filteredLinkObject: IAnalysisFilter = {}
+  propertyPresentInAllLinks: Set<string> = new Set()
+
   filterLinkPropertiesToEnabledCountMap: { [key in string]: number } = {}
   filterLinkPropertiesTotalValuesMap: { [key in string]: number } = {}
 
-  defaultFilterValues?: IAnalysisFilter
   nodeDetails?: falcorDependencyGraph["nodesById"][0]
 
-  ngOnInit() {
-    this.analysisOutput = analysisOutput
+  ngOnInit() {    
+    this.calculateDefaultNodeFilteredValues(this.analysisOutput)
+    this.calculateDefaultLinkFilteredValues(this.analysisOutput)
+    this.previousLinkFilterValues = this.filteredLinkObject
+    this.previousNodeFilterValues = this.filteredNodeObject
+
+    this.handleNodeFilterChange(this.filteredNodeObject)
   }
 
   ngAfterViewInit() {
-    this.drawGraph(analysisOutput)
+    this.drawGraph(this.analysisOutput)
   }
 
   onNodeSelect = (nodeId: string) => {
@@ -58,9 +67,46 @@ export class AppComponent {
     onClick: this.onNodeSelect
   }
 
+  previousNodeFilterValues?: IAnalysisFilter
+  previousLinkFilterValues?: IAnalysisFilter
+
   handleNodeFilterChange(filterValues: IAnalysisFilter) {
-    this.filteredOutput = structuredClone(analysisOutput)
-    const nodeIds = new Set<string>(Object.keys(analysisOutput.nodesById));
+    this.previousNodeFilterValues = filterValues
+
+    let newGraph
+    newGraph = this.processNodeFilter(filterValues, analysisOutput)
+    if (this.previousLinkFilterValues) {
+      newGraph = this.processLinkFilter(this.previousLinkFilterValues, newGraph)
+    }
+
+    if (newGraph) {
+      this.filteredOutput = newGraph
+      this.drawGraph(this.filteredOutput)
+    }
+  }
+
+  handleLinkFilterChange(filterValues: IAnalysisFilter) {
+    this.previousLinkFilterValues = filterValues
+
+    let newGraph
+    if (this.previousNodeFilterValues) {
+      newGraph = this.processNodeFilter(this.previousNodeFilterValues, analysisOutput)
+    }
+    console.log(filterValues, "f vals")
+    console.log(newGraph ?? analysisOutput, "f vals 2")
+    newGraph = this.processLinkFilter(filterValues, newGraph ?? analysisOutput)
+
+    if (newGraph) {
+      this.filteredOutput = newGraph
+      this.drawGraph(this.filteredOutput)
+    }
+  }
+
+  processNodeFilter(filterValues: IAnalysisFilter, analysisGraph: falcorDependencyGraph): falcorDependencyGraph {
+    let filteredOutput = structuredClone(analysisGraph)
+    const nodeIds = new Set<string>(Object.keys(analysisGraph.nodesById));
+
+    const newFilteredNodeObject: IAnalysisFilter = structuredClone(this.filteredNodeObject)
 
     console.log(filterValues)
     // For each key in the filter values, 
@@ -70,10 +116,11 @@ export class AppComponent {
 
       nodeIds.forEach((nodeId) => {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
+          newFilteredNodeObject[key] = filterValues[key]
           // Remove nodes from the list if their value matches the filter value and
           // the filter value is not enabled for display
           if (!enabled) {
-            if (analysisOutput.nodesById[nodeId][key] === value) {
+            if (analysisOutput.nodesById[nodeId][key] === value && this.propertyPresentInAllNodes.has(key)) {
               nodeIds.delete(nodeId)
             }
           }
@@ -86,11 +133,12 @@ export class AppComponent {
           }
         })
       })
+
     })
 
     // TODO: Hardcoding id as second element here, ensure no side effects
-    this.filteredOutput!.nodes = this.analysisOutput!.nodes.filter((node) => nodeIds.has(node.value[1]))
-    this.filteredOutput!.links = this.analysisOutput!.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
+    filteredOutput.nodes = analysisGraph.nodes.filter((node) => nodeIds.has(node.value[1]))
+    filteredOutput.links = analysisGraph.links.filter((link) => nodeIds.has(link.source.value[1]) && nodeIds.has(link.target.value[1]))
 
     const tempPropertiesToEnabledCountMap: { [key in string]: number } = {} = {}
     const tempPropertiesToCountMap: { [key in string]: number } = {} = {}
@@ -108,31 +156,31 @@ export class AppComponent {
       tempPropertiesToEnabledCountMap[key] = currentEnabledKeyTotal
       tempPropertiesToCountMap[key] = currentKeyTotal
     })
+
     this.filterNodePropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
     this.filterNodePropertiesTotalValuesMap = tempPropertiesToCountMap
-
-    console.debug("Final Node Ids post filter: ", nodeIds)
-    this.drawGraph(this.filteredOutput!)
+    this.filteredNodeObject = newFilteredNodeObject
+    
+    return filteredOutput
   }
 
-  handleLinkFilterChange(filterValues: IAnalysisFilter) {
-    this.filteredOutput = structuredClone(analysisOutput)
-    let links = [...this.filteredOutput!.links]
+  processLinkFilter(filterValues: IAnalysisFilter, analysisGraph: falcorDependencyGraph): falcorDependencyGraph {
+    let filteredOutput = structuredClone(analysisGraph)
+    let links = [...analysisGraph.links]
 
-    console.log(filterValues, "Filtering links using these values")
-
+    const newFilteredLinkObject: IAnalysisFilter = structuredClone(this.filteredLinkObject)
+    
     Object.keys(filterValues).forEach((key) => {
 
-      this.filteredOutput!.links.forEach((link) => {
+      filteredOutput.links.forEach((link: falcorDependencyGraph["links"][0]) => {
         Object.entries(filterValues[key]).forEach(([value, enabled]) => {
+          newFilteredLinkObject[key] = filterValues[key]
           // Remove nodes from the list if their value matches the filter value and
           // the filter value is not enabled for display
           if (!enabled) {
-            console.log(link[key], value, enabled)
-            if (link[key] === value) {
+            if (link[key] === value && this.propertyPresentInAllLinks.has(key)) {
               //@ts-ignore
               links = links.filter((l) => l[key] !== value)
-              console.log(links.length, "l after filter")
             }
           }
           // If the current key is enabled, but the value for the key in the node is undefined, 
@@ -140,7 +188,7 @@ export class AppComponent {
           if (enabled) {
             if (link[key] === undefined) {
               //@ts-ignore
-              links = links.filter((l) => l[key]!== value)
+              links = links.filter((l) => l[key] !== value)
             }
           }
         })
@@ -149,7 +197,7 @@ export class AppComponent {
 
     // TODO: Hardcoding id as second element here, ensure no side effects
     // this.filteredOutput!.nodes = this.analysisOutput!.nodes.filter((node) => nodeIds.has(node.value[1]))
-    this.filteredOutput!.links = links
+    filteredOutput.links = links
 
     const tempPropertiesToEnabledCountMap: { [key in string]: number } = {} = {}
     const tempPropertiesToCountMap: { [key in string]: number } = {} = {}
@@ -169,14 +217,16 @@ export class AppComponent {
     })
     this.filterLinkPropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
     this.filterLinkPropertiesTotalValuesMap = tempPropertiesToCountMap
+    this.filteredLinkObject = newFilteredLinkObject
 
     console.debug("Final Links post filter: ", links)
-    this.drawGraph(this.filteredOutput!)
+
+    return filteredOutput
   }
 
-  drawGraph(analysisOutput: falcorDependencyGraph) {
+  drawGraph(analysisGraph: falcorDependencyGraph) {
     //@ts-ignore
-    const chart = ForceGraph(analysisOutput, this.chart)
+    const chart = ForceGraph(analysisGraph, this.chart)
     console.log(chart, "cht")
 
     const chartDiv = document.querySelector('#chart-div')
@@ -187,6 +237,152 @@ export class AppComponent {
     } else {
       console.error(`chartDiv element wasn't selectable`)
     }
+  }
+
+  calculateDefaultNodeFilteredValues(analysisGraph: falcorDependencyGraph) {
+    const { codeElementProperties, propertyPresentInAllNodes } = this.getFilterableNodeKeys(analysisGraph)
+    this.propertyPresentInAllNodes = propertyPresentInAllNodes
+    const filterableKeys = Array.from(codeElementProperties)
+    const nodesObject: falcorDependencyGraph["nodesById"] = analysisGraph.nodesById
+
+    const filterableValues: { [key in string]: string[] } = {}
+    const filteredObject: { [key in string]: { [key in string]: boolean } } = {}
+
+    filterableKeys.forEach((key) => {
+      const valuesList: string[] = []
+      const valuesSet: { [key in string]: boolean } = {}
+
+      Object.values(nodesObject).forEach((node) => {
+        if (valuesSet[node[key]]) {
+          return
+        } else if (node[key] !== undefined) {
+          valuesSet[node[key]] = propertyPresentInAllNodes.has(key) ? true : false
+          valuesList.push(node[key])
+        }
+      })
+      filterableValues[key] = valuesList
+      filteredObject[key] = valuesSet
+    })
+
+    this.filteredNodeObject = filteredObject
+    console.debug(this.filteredNodeObject, "filt object at end")
+  }
+
+  getFilterableNodeKeys(graph: falcorDependencyGraph) {
+    const codeElements = Object.values(graph.nodesById)
+
+    const codeElementProperties = new Set<string>()
+    const propertyNameToCountMap = new Map<string, number>();
+    const propertyPresentInAllNodes = new Set<string>()
+
+    if (!(codeElements.length > 0)) {
+      console.error('Output graph has no nodes in nodesById key')
+      return ({ codeElementProperties, propertyPresentInAllNodes })
+    }
+
+    // Loop over every node, and for each node, check every property
+    // it contains, and add it to the unique Set of code element properties
+    codeElements.forEach((codeElement) => {
+      Object.keys(codeElement).forEach((codeElementProperty) => {
+
+        codeElementProperties.add(codeElementProperty)
+
+        if (propertyNameToCountMap.has(codeElementProperty)) {
+          const previousCount = propertyNameToCountMap.get(codeElementProperty)!
+          propertyNameToCountMap.set(codeElementProperty, previousCount + 1)
+        } else {
+          propertyNameToCountMap.set(codeElementProperty, 1)
+        }
+
+      })
+    })
+
+    propertyNameToCountMap.forEach((count, property) => {
+      if (count === codeElements.length) {
+        propertyPresentInAllNodes.add(property)
+      }
+    })
+
+    console.log(codeElementProperties, "codeElementProperties")
+    codeElementProperties.delete('Non Filterable')
+    propertyPresentInAllNodes.delete('Non Filterable')
+    return ({ codeElementProperties, propertyPresentInAllNodes })
+  }
+
+  calculateDefaultLinkFilteredValues(analysisGraph: falcorDependencyGraph) {
+    const { linkElementProperties, propertyPresentInAllLinks } = this.getFilterableLinkKeys(analysisGraph)
+    this.propertyPresentInAllLinks = propertyPresentInAllLinks
+
+    const filterableKeys = Array.from(linkElementProperties)
+    const links: falcorDependencyGraph["links"] = analysisGraph.links
+
+    const filterableValues: { [key in string]: string[] } = {}
+    const filteredObject: { [key in string]: { [key in string]: boolean } } = {}
+
+    filterableKeys.forEach((key) => {
+      const valuesList: string[] = []
+      const valuesSet: { [key in string]: boolean } = {}
+
+      links.forEach((link) => {
+        //@ts-ignore
+        if (valuesSet[link[key]]) {
+          return
+        } else if (link[key] !== undefined) {
+          //@ts-ignore
+          valuesSet[link[key]] = propertyPresentInAllLinks.has(key) ? true : false
+          //@ts-ignore
+          valuesList.push(link[key])
+        }
+      })
+      filterableValues[key] = valuesList
+      filteredObject[key] = valuesSet
+    })
+
+    this.filteredLinkObject = filteredObject
+
+    console.debug(this.filteredNodeObject, "filt object at end")
+  }
+
+  getFilterableLinkKeys(graph: falcorDependencyGraph) {
+    const linkElements = graph.links
+
+    const linkElementProperties = new Set<string>()
+    const propertyNameToCountMap = new Map<string, number>();
+    const propertyPresentInAllLinks = new Set<string>()
+
+    if (!(linkElements.length > 0)) {
+      console.error('Output graph has no links in nodesById key')
+      return ({ linkElementProperties, propertyPresentInAllLinks })
+    }
+
+    // Loop over every link, and for each node, check every property
+    // it contains, and add it to the unique Set of code element properties
+    linkElements.forEach((linkElement) => {
+      Object.keys(linkElement).forEach((linkElementProperty) => {
+
+        if (linkElementProperty === 'source' || linkElementProperty === 'target') {
+          return
+        }
+
+        linkElementProperties.add(linkElementProperty)
+
+        if (propertyNameToCountMap.has(linkElementProperty)) {
+          const previousCount = propertyNameToCountMap.get(linkElementProperty)!
+          propertyNameToCountMap.set(linkElementProperty, previousCount + 1)
+        } else {
+          propertyNameToCountMap.set(linkElementProperty, 1)
+        }
+
+      })
+    })
+
+    propertyNameToCountMap.forEach((count, property) => {
+      if (count === linkElements.length) {
+        propertyPresentInAllLinks.add(property)
+      }
+    })
+
+    return ({ linkElementProperties, propertyPresentInAllLinks })
   }
 
 }

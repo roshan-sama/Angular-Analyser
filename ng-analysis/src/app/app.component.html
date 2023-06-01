@@ -43,6 +43,7 @@
           <node-filter-presentation [analysisGraph]="analysisOutput"
             [filterPropertiesToEnabledCountMap]="filterNodePropertiesToEnabledCountMap"
             [filterPropertiesTotalValuesMap]="filterNodePropertiesTotalValuesMap"
+            [filteredObject]="filteredNodeObject"
             (filterChangeEvent)="handleNodeFilterChange($event)">
           </node-filter-presentation>
         </mat-tab>
@@ -50,6 +51,7 @@
           <link-filter-presentation [analysisGraph]="analysisOutput"
             [filterPropertiesToEnabledCountMap]="filterLinkPropertiesToEnabledCountMap"
             [filterPropertiesTotalValuesMap]="filterLinkPropertiesTotalValuesMap"
+            [filteredObject]="filteredLinkObject"
             (filterChangeEvent)="handleLinkFilterChange($event)">
           </link-filter-presentation>
         </mat-tab>

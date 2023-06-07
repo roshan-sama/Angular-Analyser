@@ -33,9 +33,9 @@ export class AppComponent {
   filterLinkPropertiesToEnabledCountMap: { [key in string]: number } = {}
   filterLinkPropertiesTotalValuesMap: { [key in string]: number } = {}
 
-  nodeDetails?: falcorDependencyGraph["nodesById"][0]
+  nodeDetails?: { details: falcorDependencyGraph["nodesById"][0], id: string }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.calculateDefaultNodeFilteredValues(this.analysisOutput)
     this.calculateDefaultLinkFilteredValues(this.analysisOutput)
     this.previousLinkFilterValues = this.filteredLinkObject
@@ -49,7 +49,7 @@ export class AppComponent {
   }
 
   onNodeSelect = (nodeId: string) => {
-    this.nodeDetails = analysisOutput.nodesById[nodeId]
+    this.nodeDetails = { details: analysisOutput.nodesById[nodeId], id: nodeId }
   }
 
   chart = {
@@ -160,7 +160,7 @@ export class AppComponent {
     this.filterNodePropertiesToEnabledCountMap = tempPropertiesToEnabledCountMap
     this.filterNodePropertiesTotalValuesMap = tempPropertiesToCountMap
     this.filteredNodeObject = newFilteredNodeObject
-    
+
     return filteredOutput
   }
 
@@ -169,7 +169,7 @@ export class AppComponent {
     let links = [...analysisGraph.links]
 
     const newFilteredLinkObject: IAnalysisFilter = structuredClone(this.filteredLinkObject)
-    
+
     Object.keys(filterValues).forEach((key) => {
 
       filteredOutput.links.forEach((link: falcorDependencyGraph["links"][0]) => {

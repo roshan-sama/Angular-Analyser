@@ -32,6 +32,8 @@ public class App {
         String code = "public class Test { }";
         CompilationUnit cu = StaticJavaParser.parse(code);
         ClassOrInterfaceDeclaration cf = cu.getClassByName("Test").get();
+        
+        WriteToFile.WriteJson();
         // cf.
         // System.out.println(cu.toString());
 

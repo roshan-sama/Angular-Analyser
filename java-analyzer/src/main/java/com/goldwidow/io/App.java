@@ -1,7 +1,11 @@
 package com.goldwidow.io;
 
+import java.io.File;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import com.github.javaparser.JavaParser;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -29,10 +34,17 @@ public class App {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 
-        String code = "public class Test { }";
-        CompilationUnit cu = StaticJavaParser.parse(code);
-        ClassOrInterfaceDeclaration cf = cu.getClassByName("Test").get();
-        
+        File projectDirectory = new File("/workspaces/Angular-Analyser/java-analyzer/src/main/java/com/goldwidow/io");
+        List<CompilationUnit> units = new ArrayList<>();
+        for (File file : FileUtils.listFiles(projectDirectory, new String[] { "java" }, true)) {
+            System.out.println("File: " + file.getAbsolutePath());
+            try {
+                CompilationUnit cu = StaticJavaParser.parse(file);
+                units.add(cu);
+            } catch (Exception e) {
+                System.out.println("Unable to parse: " + file.getAbsolutePath());
+            }
+        }
         WriteToFile.WriteJson();
         // cf.
         // System.out.println(cu.toString());
@@ -46,7 +58,7 @@ public class App {
             request.setRequestURI("/api/test");
 
             System.out.println(requestMappingHandlerMapping.getPathMatcher());
-            requestMappingHandlerMapping.getPatternParser();//() .match(request, "/");
+            requestMappingHandlerMapping.getPatternParser();// () .match(request, "/");
 
             // Your logic goes here
             requestMappingHandlerMapping.getHandlerMethods().keySet().forEach(mapping -> {

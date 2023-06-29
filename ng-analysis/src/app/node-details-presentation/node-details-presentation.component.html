@@ -12,6 +12,13 @@
         File: {{nodeDetails?.details?.["File Path"]}}<br>
     </ng-container>
     <p *ngIf="!nodeDetails?.details">Select Node to view details</p>
+    <ng-container [formGroup]="nodeDetailsForm">
+        <mat-radio-group formControlName="treeGraphDirection">
+            <mat-radio-button value="sourceToTarget">Source -> Target</mat-radio-button>
+            <mat-radio-button value="targetToSource">Target -> Source</mat-radio-button>
+        </mat-radio-group>
+    </ng-container>
+
     <div class="border" style="max-width: 1280px; max-height: 640; min-height: 200px;">
         <div id="tree-graph-div" class="overflow-hidden" style="max-width: 1280px; max-height: 640px;"></div>
     </div>

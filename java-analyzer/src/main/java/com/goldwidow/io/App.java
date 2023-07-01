@@ -47,38 +47,54 @@ public class App {
         // Use the combined solver
         JavaSymbolSolver symbolSolver = new JavaSymbolSolver(combinedTypeSolver);
         StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
+        List<Node> nodes = new ArrayList<Node>();
 
         for (File file : FileUtils.listFiles(projectDirectory, new String[] { "java" }, true)) {
+
             System.out.println("File: " + file.getAbsolutePath());
+
             try {
                 CompilationUnit cu = StaticJavaParser.parse(file);
+
                 cu.findAll(ClassOrInterfaceDeclaration.class).forEach(c -> {
-                    System.out.println(c.getName());
-                    System.out.println(c.getFullyQualifiedName());                    
+                    String fullName = c.getFullyQualifiedName().get();
+                    String type = c.isInterface() ? "interface" : "class";
+
+                    if (null != fullName && fullName.contains("com.goldwidow.io")) {
+                        Node node = new Node(fullName, type, file.getAbsolutePath());
+                        nodes.add(node);
+                        System.out.println(c.getName());
+                        System.out.println(c.getFullyQualifiedName());
+                    } else {
+                        System.out.println("Could not obtain full name for : " + file.getAbsolutePath());
+                    }
+
                 });
+
             } catch (Exception e) {
                 System.out.println("Unable to parse: " + file.getAbsolutePath());
             }
         }
 
+        WriteToFile.WriteJson(nodes);
 
         return args -> {
 
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
+            // System.out.println("Let's inspect the beans provided by Spring Boot:");
 
-            MockHttpServletRequest request = new MockHttpServletRequest();
-            request.setMethod("GET");
-            request.setRequestURI("/api/test");
+            // MockHttpServletRequest request = new MockHttpServletRequest();
+            // request.setMethod("GET");
+            // request.setRequestURI("/api/test");
 
-            System.out.println(requestMappingHandlerMapping.getPathMatcher());
-            requestMappingHandlerMapping.getPatternParser();// () .match(request, "/");
+            // System.out.println(requestMappingHandlerMapping.getPathMatcher());
+            // requestMappingHandlerMapping.getPatternParser();// () .match(request, "/");
 
-            // Your logic goes here
-            requestMappingHandlerMapping.getHandlerMethods().keySet().forEach(mapping -> {
-                mapping.getDirectPaths();
-                System.out.println(mapping);
-                System.out.println(mapping.getDirectPaths());
-            });
+            // // Your logic goes here
+            // requestMappingHandlerMapping.getHandlerMethods().keySet().forEach(mapping -> {
+            //     mapping.getDirectPaths();
+            //     System.out.println(mapping);
+            //     System.out.println(mapping.getDirectPaths());
+            // });
             ;// .keySet().toArray();
 
         };

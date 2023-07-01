@@ -69,6 +69,8 @@ nodesByIdMap.forEach((node, id) => {
 })
 
 // Analyze links between Nodes
+// TODO: Fix link directions to make sure direction makes sense when displayed by force graph in the 
+// ng-analysis folder.
 createReferenceLinksForNodes(rawNodesByIdMap, nodesByIdMap)
 
 // Analyze links between Angular Components

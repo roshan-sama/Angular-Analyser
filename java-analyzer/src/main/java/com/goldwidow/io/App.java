@@ -19,6 +19,9 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.symbolsolver.JavaSymbolSolver;
+import com.github.javaparser.symbolsolver.model.resolution.TypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -36,18 +39,28 @@ public class App {
 
         File projectDirectory = new File("/workspaces/Angular-Analyser/java-analyzer/src/main/java/com/goldwidow/io");
         List<CompilationUnit> units = new ArrayList<>();
+
+        TypeSolver javaParserTypeSolver = new JavaParserTypeSolver(projectDirectory);
+        CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver();
+        combinedTypeSolver.add(javaParserTypeSolver);
+
+        // Use the combined solver
+        JavaSymbolSolver symbolSolver = new JavaSymbolSolver(combinedTypeSolver);
+        StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
+
         for (File file : FileUtils.listFiles(projectDirectory, new String[] { "java" }, true)) {
             System.out.println("File: " + file.getAbsolutePath());
             try {
                 CompilationUnit cu = StaticJavaParser.parse(file);
-                units.add(cu);
+                cu.findAll(ClassOrInterfaceDeclaration.class).forEach(c -> {
+                    System.out.println(c.getName());
+                    System.out.println(c.getFullyQualifiedName());                    
+                });
             } catch (Exception e) {
                 System.out.println("Unable to parse: " + file.getAbsolutePath());
             }
         }
-        WriteToFile.WriteJson();
-        // cf.
-        // System.out.println(cu.toString());
+
 
         return args -> {
 

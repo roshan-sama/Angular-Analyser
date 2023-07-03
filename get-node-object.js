@@ -4,7 +4,7 @@ const typedefs = require("./typedefs");
 
 /** @type {typedefs.classSubType} */
 let classKind
-/** @type {typedefs.classType} */
+/** @type {typedefs.nodeType} */
 let nodeType
 let declarationType
 
@@ -27,7 +27,7 @@ const syntaxKindToNodeObjectMap = {
 
         const returnObject = { ...baseNodeObject }
         returnObject.Name = node.getBaseName()
-        returnObject.Type = 'Source File'
+        returnObject.Type = 'JS Source File'
         returnObject['File Path'] = node.getFilePath()
 
         return {
@@ -36,11 +36,11 @@ const syntaxKindToNodeObjectMap = {
         }
     },
     [tsMorph.SyntaxKind.FunctionDeclaration]: (node) => {
-        nodeName = `${node.getName()} (Function)`
+        nodeName = `${node.getName()} (JS Function)`
         const returnObject = { ...baseNodeObject }
 
         returnObject.Name = nodeName
-        returnObject.Type = 'Function'
+        returnObject.Type = 'JS Function'
         returnObject['File Path'] = node.getSourceFile().getFilePath()
 
         return {
@@ -60,7 +60,7 @@ const syntaxKindToNodeObjectMap = {
         //TODO: Enable users to select decorators to obtain in main file
         // Would be a useful feature
         classKind = undefined
-        nodeType = 'Class'
+        nodeType = 'JS Class'
 
         const isComponent = node.getDecorators().some((decorator) => decorator.getName() === 'Component')
 
@@ -135,7 +135,7 @@ const syntaxKindToNodeObjectMap = {
         // And if the sourcefile is the highest level found, we could add the 
         // highest Syntax kind that is one level below the source file that references
         // the Identifier
-        nodeName = `${node.getName()} (${classKind ? classKind : 'Class'})`
+        nodeName = `${node.getName()} (${classKind ? classKind : 'JS Class'})`
 
         const returnObject = { ...baseNodeObject }
 
@@ -163,8 +163,8 @@ const syntaxKindToNodeObjectMap = {
         declarationType = node.getVariableStatement().getDeclarationList().getDeclarationKind()
         // Check if initializer is a function
         if (initializer && tsMorph.Node.isArrowFunction(initializer)) {
-            nodeName = `${node.getName()} (Arrow Function - ${declarationType})`
-            nodeType = 'Arrow Function'
+            nodeName = `${node.getName()} (JS Arrow Function - ${declarationType})`
+            nodeType = 'JS Arrow Function'
         } else {
             nodeName = `${node.getName()} (${declarationType})`
             nodeType = getNodeTypeFromDeclarationType(declarationType)
@@ -224,17 +224,17 @@ const getNodeId = (analysisSourceFile, nodeName) => {
 /**
 * Gets the node type corresponding to the declataion type (const, let, var)
 * @param {'const' | 'let' | 'var'} declarationType - The node's name
-* @returns {typedefs.classType} The node type
+* @returns {typedefs.nodeType} The node type
 */
 function getNodeTypeFromDeclarationType(declarationType) {
     if (declarationType === 'const') {
-        return 'Const'
+        return 'JS Const'
     }
     if (declarationType === 'let') {
-        return 'Let variable'
+        return 'JS Let variable'
     }
     if (declarationType === 'var') {
-        return 'Var variable'
+        return 'JS Var variable'
     }
 }
 

@@ -2,7 +2,7 @@
 /**
  * @typedef {Object} NodeObject
  * @property {string} Name - The name of the node.
- * @property {classType} Type - The type of the node.
+ * @property {nodeType} Type - The type of the node.
  * @property {string} ['File Path'] - The file path of the node, if applicable.
  * @property {any} ['Non Filterable'] - Any additional information that should not be used for filtering.
  */
@@ -58,7 +58,7 @@
 
 
 /**
- * @typedef {"Class" | "Function" | "Arrow Function" | "Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "Const" | "Let variable" | "Var variable"} classType
+ * @typedef {"JS Class" | "JS Function" | "JS Arrow Function" | "JS Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "JS Const" | "JS Let variable" | "JS Var variable"} nodeType
  * */
 
 /**

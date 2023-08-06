@@ -1,6 +1,7 @@
 
 const tsMorph = require("ts-morph");
 const typedefs = require("./typedefs");
+const { angularHttpClientType } = require("./constants");
 
 /** @type {typedefs.classSubType} */
 let classKind
@@ -85,11 +86,11 @@ const syntaxKindToNodeObjectMap = {
 
                 const templateUrlProperty = properties.find((property) => property.getStructure().name === 'templateUrl')
                 if (templateUrlProperty) {
-                    filePathToTemplate =templateUrlProperty.getDescendantsOfKind(tsMorph.SyntaxKind.StringLiteral)[0]?.getLiteralValue()
+                    filePathToTemplate = templateUrlProperty.getDescendantsOfKind(tsMorph.SyntaxKind.StringLiteral)[0]?.getLiteralValue()
                 } else {
                     const templateProperty = properties.find((property) => property.getStructure().name === 'template')
                     if (templateProperty) {
-                        filePathToTemplate =  node.getSourceFile().getBaseName()
+                        filePathToTemplate = node.getSourceFile().getBaseName()
                     }
                 }
 
@@ -238,7 +239,52 @@ function getNodeTypeFromDeclarationType(declarationType) {
     }
 }
 
+/**
+* Return a list of api call methods present in the Angular Service
+* @param {'tsMorph.Node'} angularServiceClassNode - The Angular Service node
+* @returns {typedefs.NodeObjectWithId[]} The node type
+*/
+const getApiCallNodes = (angularServiceClassNode) => {
+    const constructors = angularServiceClassNode.getConstructors()
+
+    if (constructors.length !== 1) {
+        console.error(`Angular Service has ${constructors.length} constructors. Expected one constructor injected via constructor injection.`)
+        return []
+    }
+
+    let httpClientVariableName
+    constructors[0].getStructure().parameters.forEach((parameter) => {
+        if (parameter.type === angularHttpClientType) {
+            httpClientVariableName = parameter.name
+        }
+    })
+
+    if (!httpClientVariableName) {
+        return []
+    }
+
+    /** @type typedefs.NodeObject[] */
+    const apiCallNodes = []
+
+    const methods = angularServiceClassNode.getMethods();
+    methods.forEach(method => {
+        // Find references to httpClient in each method
+        const references = method
+            .getDescendants()
+            .filter(descendant => descendant.getKindName() === 'PropertyAccessExpression'
+                && descendant.getFirstChildByKind(tsMorph.SyntaxKind.Identifier).getText() === 'httpClient');
+
+        references.forEach(ref => console.log(`In method ${method.getName()}, reference: ${ref.getText()}`));
+        apiCallNodes.push({
+            Name: method.getName(),
+            Type: 'Angular Service API Call',
+            'File Path': method.getSourceFile().getFilePath(),
+        })
+    });
+}
+
 module.exports = {
     getNodeObject,
-    getNodeId
+    getNodeId,
+    getApiCallNodes
 };

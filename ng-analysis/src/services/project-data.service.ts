@@ -11,4 +11,8 @@ export class ProjectDataService {
     getProjectData() {
         return this.httpClient.get('http://localhost:3000/api/project-data');
     }
+
+    setProjectData() {
+        return this.httpClient.post('http://localhost:3000/api/project-data', {});
+    }
 }

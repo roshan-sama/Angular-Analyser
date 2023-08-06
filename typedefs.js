@@ -58,7 +58,7 @@
 
 
 /**
- * @typedef {"JS Class" | "JS Function" | "JS Arrow Function" | "JS Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "JS Const" | "JS Let variable" | "JS Var variable"} nodeType
+ * @typedef {"JS Class" | "JS Function" | "JS Arrow Function" | "JS Source File" | "Angular Component" | "Angular Service" | "Angular Module" | "Angular API Call" | "JS Const" | "JS Let variable" | "JS Var variable" | "Java Class" | "Java Interface"} nodeType
  * */
 
 /**

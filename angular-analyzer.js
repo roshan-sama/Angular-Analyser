@@ -4,7 +4,7 @@ const glob = require("glob");
 const fs = require("fs")
 const path = require('path');
 const getParentIdentifier = require("./get-parent-identifier");
-const { getNodeObject } = require("./get-node-object");
+const { getNodeObject, getApiCallNodes } = require("./get-node-object");
 
 const project = new tsMorph.Project({
     tsConfigFilePath: "ng-analysis/tsconfig.json",
@@ -99,6 +99,11 @@ function analyzeFileForNodes(analysisSourceFile, getNodeElements) {
 
         nodesByIdMap.set(sourceNodeObject.id, sourceNodeObject.nodeObject)
         rawNodesByIdMap.set(sourceNodeObject.id, analysisNode)
+
+
+        if (sourceNodeObject.nodeObject.Type === 'Angular Service') {
+            const apiCallNodes = getApiCallNodes(analysisNode)
+        }
     }
 }
 
@@ -168,9 +173,9 @@ function createAngularComponentLinksForNodes(rawNodesByIdMap, ngComponentByIdMap
         }
         else {
             const absoluteTemplatePath = path.resolve(path.dirname(nodeSourceFilePath), templatePath)
-            try{
-            nodeText = fs.readFileSync(absoluteTemplatePath, 'utf8')
-            }catch(ex){
+            try {
+                nodeText = fs.readFileSync(absoluteTemplatePath, 'utf8')
+            } catch (ex) {
                 errors.push(`During Link analysis of ${sourceId} Unable to read file: `, absoluteTemplatePath)
                 console.error('Unable to read file: ', absoluteTemplatePath)
             }
@@ -258,7 +263,9 @@ const fileOutput = `import { falcorDependencyGraph } from "src/app/interfaces/fa
 
 export const analysisOutput: falcorDependencyGraph =
 ` + JSON.stringify(dependencyGraph, null, 2)
+
 fs.writeFileSync("ng-analysis/src/utils/analysis-output.ts", fileOutput)
+fs.writeFileSync("analysis-output.json", JSON.stringify(dependencyGraph, null, 2))
 
 errors.length > 0 && console.log("Errors occurred during analysis: ", errors)
 
